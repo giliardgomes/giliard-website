@@ -4,11 +4,6 @@
 
 :root {
   /* Colors */
-  --color-bg: #ffffff;
-  --color-text: #111111;
-  --color-text-muted: #666666;
-  --color-accent: #000000;
-  --color-border: #e5e5e5;
   --color-black: #000;
   --color-white: #fff;
 
@@ -76,7 +71,7 @@
     --color-bg: #111111;
     --color-text: #f5f5f5;
     --color-text-muted: #999999;
-    --color-accent: #ffffff;
+    --color-accent: tomato;
     --color-border: #222222;
   }
 }
@@ -115,10 +110,6 @@ a {
   text-decoration: none;
 }
 
-ul, ol {
-  list-style: none;
-}
-
 button {
   cursor: pointer;
   border: none;
@@ -134,7 +125,7 @@ input, textarea {
   --color-bg: #111111;
   --color-text: #fafafa;
   --color-text-muted: #999999;
-  --color-accent: #ffffff;
+  --color-accent: tomato;
   --color-border: #222222;
 }
 
@@ -142,7 +133,7 @@ input, textarea {
   --color-bg: #ffffff;
   --color-text: #111111;
   --color-text-muted: #666666;
-  --color-accent: #000000;
+  --color-accent: tomato;
   --color-border: #e5e5e5;
 }
 

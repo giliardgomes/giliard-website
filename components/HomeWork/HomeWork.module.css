@@ -1,0 +1,13 @@
+.homeWork {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    position: relative;
+    z-index: 1;
+    background-color: var(--color-bg);
+    min-height: 100svh;
+}
+
+.wrapper {
+    max-width: var(--bp-2xl);
+    margin: 0 auto;
+}

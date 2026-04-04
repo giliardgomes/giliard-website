@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${youngSerif.variable} ${interTight.variable}`}>
+      <body className={`${youngSerif.variable} ${interTight.variable}`} suppressHydrationWarning>
         <script
           dangerouslySetInnerHTML={{
             __html: `
