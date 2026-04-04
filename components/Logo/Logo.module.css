@@ -1,0 +1,12 @@
+.logo {
+    display: flex;
+
+    svg {
+        path {
+            fill: var(--color-black);
+        }
+
+        max-height: 4rem;
+        width: auto;
+    }
+}
