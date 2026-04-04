@@ -36,6 +36,7 @@
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
 
+  --line-height-equal: 1;
   --line-height-tight: 1.2;
   --line-height-normal: 1.5;
   --line-height-loose: 1.8;
@@ -197,4 +198,34 @@ strong {
 
 em {
   font-style: italic;
+}
+
+@keyframes slideFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideFromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+[data-icon='moon'] {
+  animation: slideFromTop 250ms ease forwards;
+}
+
+[data-icon='sun'] {
+  animation: slideFromBottom 250ms ease forwards;
 }

@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react'
 import styles from './ThemeToggle.module.css'
+import SunIcon from './SunIcon'
+import MoonIcon from './MoonIcon'
 
 export default function ThemeToggle() {
   const [isDark, setIsDark] = useState(false)
@@ -29,8 +31,12 @@ export default function ThemeToggle() {
       aria-label="Toggle dark mode"
       data-mounted={mounted}
     >
-      <span className={styles.icon}>
-        {mounted ? (isDark ? '☀️' : '🌙') : null}
+      <span
+        className={styles.icon}
+        key={isDark ? 'sun' : 'moon'}
+        data-icon={isDark ? 'sun' : 'moon'}
+      >
+        {mounted ? (isDark ? <SunIcon /> : <MoonIcon />) : null}
       </span>
     </button>
   )

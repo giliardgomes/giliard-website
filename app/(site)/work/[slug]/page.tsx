@@ -3,13 +3,10 @@ import { CASE_STUDY_BY_SLUG_QUERY } from '@/sanity/lib/queries'
 import { PortableText } from '@portabletext/react'
 import imageUrlBuilder from '@sanity/image-url'
 import Image from 'next/image'
+import Main from '@/components/Main/Main'
+import styles from './CaseStudy.module.css'
 
 const builder = imageUrlBuilder(client)
-
-import Main from "@/components/Main/Main"
-import Header from "@/components/Header/Header"
-
-import styles from '../[slug]/CaseStudy.module.css'
 
 function urlFor(source: any) {
   return builder.image(source)
@@ -29,17 +26,16 @@ export default async function CaseStudyPage({ params }: Props) {
 
   return (
     <>
-      <Header />
       {caseStudy.coverImage && (
-          <Image
-            className={styles.featuredImage}
-            src={urlFor(caseStudy.coverImage).width(1200).height(630).url()}
-            alt={caseStudy.title}
-            width={1600}
-            height={900}
-            priority
-          />
-        )}
+        <Image
+          className={styles.featuredImage}
+          src={urlFor(caseStudy.coverImage).width(1600).height(900).url()}
+          alt={caseStudy.title}
+          width={1600}
+          height={900}
+          priority
+        />
+      )}
       <Main>
         <div className={styles.post}>
           <h1>{caseStudy.title}</h1>
