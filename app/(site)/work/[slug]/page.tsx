@@ -9,6 +9,8 @@ const builder = imageUrlBuilder(client)
 import Main from "@/components/Main/Main"
 import Header from "@/components/Header/Header"
 
+import styles from '../[slug]/CaseStudy.module.css'
+
 function urlFor(source: any) {
   return builder.image(source)
 }
@@ -28,29 +30,32 @@ export default async function CaseStudyPage({ params }: Props) {
   return (
     <>
       <Header />
-      <Main>
-        {caseStudy.coverImage && (
+      {caseStudy.coverImage && (
           <Image
+            className={styles.featuredImage}
             src={urlFor(caseStudy.coverImage).width(1200).height(630).url()}
             alt={caseStudy.title}
-            width={1200}
-            height={630}
+            width={1600}
+            height={900}
             priority
           />
         )}
-        <h1>{caseStudy.title}</h1>
-        {caseStudy.client && <p>{caseStudy.client}</p>}
-        {caseStudy.summary && <p>{caseStudy.summary}</p>}
-        {caseStudy.tags && (
-          <ul>
-            {caseStudy.tags.map((tag: string) => (
-              <li key={tag}>{tag}</li>
-            ))}
-          </ul>
-        )}
-        {caseStudy.body && (
-          <PortableText value={caseStudy.body} />
-        )}
+      <Main>
+        <div className={styles.post}>
+          <h1>{caseStudy.title}</h1>
+          {caseStudy.client && <p>{caseStudy.client}</p>}
+          {caseStudy.summary && <p>{caseStudy.summary}</p>}
+          {caseStudy.tags && (
+            <ul>
+              {caseStudy.tags.map((tag: string) => (
+                <li key={tag}>{tag}</li>
+              ))}
+            </ul>
+          )}
+          {caseStudy.body && (
+            <PortableText value={caseStudy.body} />
+          )}
+        </div>
       </Main>
     </>
   )

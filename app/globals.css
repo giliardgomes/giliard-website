@@ -10,6 +10,7 @@
   --color-accent: #000000;
   --color-border: #e5e5e5;
   --color-black: #000;
+  --color-white: #fff;
 
   /* Breakpoints */
   --bp-sm: 480px;
@@ -19,8 +20,8 @@
   --bp-2xl: 1440px;
 
   /* Typography */
-  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-mono: 'Courier New', Courier, monospace;
+  --font-sans: var(--font-serif), Georgia, serif;
+  --font-sans: var(--font-sans), Arial, sans-serif;
 
   --font-size-xs: 0.75rem;    /* 12px */
   --font-size-sm: 0.875rem;   /* 14px */
@@ -126,4 +127,74 @@ button {
 
 input, textarea {
   font: inherit;
+}
+
+[data-theme='dark'] {
+  --color-bg: #111111;
+  --color-text: #fafafa;
+  --color-text-muted: #999999;
+  --color-accent: #ffffff;
+  --color-border: #222222;
+}
+
+[data-theme='light'] {
+  --color-bg: #ffffff;
+  --color-text: #111111;
+  --color-text-muted: #666666;
+  --color-accent: #000000;
+  --color-border: #e5e5e5;
+}
+
+h1, h2, h3 {
+    font-family: var(--font-serif);
+}
+
+/* ================================
+   TYPOGRAPHY
+   ================================ */
+
+blockquote {
+  border-left: 3px solid var(--color-border);
+  padding-left: var(--spacing-md);
+  color: var(--color-text-muted);
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background-color: var(--color-border);
+  padding: 2px 5px;
+  border-radius: var(--border-radius-sm);
+}
+
+pre {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background-color: var(--color-border);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  overflow-x: auto;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}
+
+ul {
+  list-style: disc;
+  padding-left: var(--spacing-lg);
+}
+
+ol {
+  list-style: decimal;
+  padding-left: var(--spacing-lg);
+}
+
+strong {
+  font-weight: var(--font-weight-semibold);
+}
+
+em {
+  font-style: italic;
 }

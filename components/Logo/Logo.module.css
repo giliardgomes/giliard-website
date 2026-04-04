@@ -10,3 +10,13 @@
         width: auto;
     }
 }
+
+html[data-theme="dark"] {
+    .logo {
+        svg {
+            path {
+                fill: var(--color-white);
+            }
+        }
+    }
+}

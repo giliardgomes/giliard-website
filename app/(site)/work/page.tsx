@@ -1,3 +1,5 @@
+import Main from "@/components/Main/Main"
+
 import { client } from '@/sanity/lib/client'
 import { CASE_STUDIES_QUERY } from '@/sanity/lib/queries'
 
@@ -5,7 +7,7 @@ export default async function WorkPage() {
   const cases = await client.fetch(CASE_STUDIES_QUERY)
 
   return (
-    <main>
+    <Main>
       <h1>Work</h1>
       <ul>
         {cases.map((item: any) => (
@@ -18,6 +20,6 @@ export default async function WorkPage() {
           </li>
         ))}
       </ul>
-    </main>
+    </Main>
   )
 }

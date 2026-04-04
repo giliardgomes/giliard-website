@@ -1,0 +1,15 @@
+.post {
+    h1 {
+        font-size: var(--font-size-2xl);
+    }
+
+    p {
+        font-size: var(--font-size-lg);
+    }
+}
+
+.featuredImage {
+    max-width: 90vw;
+    margin: 5rem auto 2rem;
+    object-fit: cover;
+}
