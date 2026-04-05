@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-import Header from "@/components/Header/Header";
-import Footer from "@/components/Footer/Footer";
-
 import { Young_Serif, Inter_Tight } from 'next/font/google'
 
 const youngSerif = Young_Serif({
@@ -26,8 +23,12 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${youngSerif.variable} ${interTight.variable}`} suppressHydrationWarning>
+      <body
+        className={`${youngSerif.variable} ${interTight.variable}`}
+        suppressHydrationWarning
+      >
         <script
+          suppressHydrationWarning
           dangerouslySetInnerHTML={{
             __html: `
               (function() {

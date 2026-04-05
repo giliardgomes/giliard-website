@@ -90,6 +90,7 @@ html {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -98,6 +99,7 @@ body {
   line-height: var(--line-height-normal);
   color: var(--color-text);
   background-color: var(--color-bg);
+  overflow-x: hidden;
 }
 
 img, video {
@@ -219,4 +221,9 @@ em {
 
 [data-icon='sun'] {
   animation: slideFromBottom 250ms ease forwards;
+}
+
+::selection {
+  background-color: var(--color-accent);
+  color: var(--color-bg);
 }

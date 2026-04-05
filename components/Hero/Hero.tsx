@@ -35,7 +35,7 @@ export default function Hero() {
         ))}
       </div>
       <CallToActions
-        primary={{ label: 'Explore', href: '/work' }}
+        primary={{ label: 'Explore', scrollTo: 'homework' }}
         secondary={{ label: 'Get in touch', href: '/about' }}
       />
     </Section>

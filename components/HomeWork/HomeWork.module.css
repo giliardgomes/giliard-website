@@ -5,9 +5,108 @@
     z-index: 1;
     background-color: var(--color-bg);
     min-height: 100svh;
+    transition: opacity 600ms ease;
+    padding: var(--spacing-2xl);
+    display: flex;
+    align-items: center;
+
+    &::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        left: 0px;
+        height: 400px;
+        background: linear-gradient(to bottom, transparent, var(--color-bg));
+        top: -400px;
+        opacity: 0;
+        transition: all 0.3s ease-in-out;
+        pointer-events: none;
+    }
+}
+
+.visible {
+    &::before {
+        opacity: 1;
+    }
 }
 
 .wrapper {
-    max-width: var(--bp-2xl);
-    margin: 0 auto;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.sectionTitle {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-muted);
+}
+
+.posts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-2xl);
+}
+
+.postCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  text-decoration: none;
+  color: var(--color-text);
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+}
+
+.titlePost {
+  position: relative;
+  padding-left: var(--spacing-lg);
+  display: flex;
+  align-items: flex-start;
+}
+
+.counter {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: var(--font-size-md);
+  opacity: 0.6;
+  font-family: var(--font-serif);
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-tight);
+  letter-spacing: -0.1px;
+  color: var(--color-text);
+  transition: color var(--transition-fast);
+}
+
+.postCard:hover .title {
+  color: var(--color-accent);
+}
+
+.viewAll {
+  margin-top: var(--spacing-2xl);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .homeWork {
+    padding: var(--spacing-lg);
+  }
+
+  .posts {
+    grid-template-columns: 1fr;
+  }
 }

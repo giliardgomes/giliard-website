@@ -12,6 +12,22 @@ function urlFor(source: any) {
   return builder.image(source)
 }
 
+const portableTextComponents = {
+  types: {
+    image: ({ value }: { value: any }) => (
+      <div className={styles.bodyImage}>
+        <Image
+          src={urlFor(value).width(1200).url()}
+          alt={value.alt || ''}
+          width={1200}
+          height={675}
+          style={{ width: '100%', height: 'auto' }}
+        />
+      </div>
+    ),
+  },
+}
+
 interface Props {
   params: Promise<{ slug: string }>
 }
@@ -49,7 +65,10 @@ export default async function CaseStudyPage({ params }: Props) {
             </ul>
           )}
           {caseStudy.body && (
-            <PortableText value={caseStudy.body} />
+            <PortableText
+              value={caseStudy.body}
+              components={portableTextComponents}
+            />
           )}
         </div>
       </Main>

@@ -4,10 +4,19 @@
     svg {
         path {
             fill: var(--color-black);
+            transition: all 0.25s ease-in-out;
         }
 
         max-height: 4rem;
         width: auto;
+    }
+
+    &:hover {
+        svg {
+            path {
+                fill: var(--color-accent);
+            }
+        }
     }
 }
 

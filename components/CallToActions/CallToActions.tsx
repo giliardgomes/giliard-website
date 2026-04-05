@@ -4,12 +4,14 @@ interface ButtonProps {
   label: string
   onClick?: () => void
   href?: string
+  scrollTo?: string
 }
 
 interface Props {
   primary?: ButtonProps
   secondary?: ButtonProps
   tertiary?: ButtonProps
+  className?: string
 }
 
 function CTAButton({
@@ -21,7 +23,16 @@ function CTAButton({
 }) {
   const className = styles[variant]
 
-  if (button.href) {
+  const handleClick = () => {
+    if (button.scrollTo) {
+      const el = document.getElementById(button.scrollTo)
+      el?.scrollIntoView({ behavior: 'smooth' })
+      return
+    }
+    button.onClick?.()
+  }
+
+  if (button.href && !button.scrollTo) {
     return (
       <a href={button.href} className={className}>
         {button.label}
@@ -30,15 +41,15 @@ function CTAButton({
   }
 
   return (
-    <button onClick={button.onClick} className={className}>
+    <button onClick={handleClick} className={className}>
       {button.label}
     </button>
   )
 }
 
-export default function CallToActions({ primary, secondary, tertiary }: Props) {
+export default function CallToActions({ primary, secondary, tertiary, className }: Props) {
   return (
-    <div className={styles.callToActions}>
+    <div className={`${styles.callToActions} ${className ?? ''}`}>
       {primary && <CTAButton button={primary} variant="primary" />}
       {secondary && <CTAButton button={secondary} variant="secondary" />}
       {tertiary && <CTAButton button={tertiary} variant="tertiary" />}

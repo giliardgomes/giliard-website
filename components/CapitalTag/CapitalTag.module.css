@@ -1,0 +1,19 @@
+.capitalTag {
+    text-transform: uppercase;
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.75px;
+    color: var(--color-text-muted);
+    line-height: var(--line-height-equal);
+
+    &[data-size="sm"] {
+        font-size: var(--font-size-sm);
+    }
+
+    &[data-size="md"] {
+        font-size: var(--font-size-md);
+    }
+
+    &[data-size="lg"] {
+        font-size: var(--font-size-lg);
+    }
+}
