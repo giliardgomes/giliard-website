@@ -109,4 +109,12 @@
   .posts {
     grid-template-columns: 1fr;
   }
+
+  .title {
+    font-size: var(--font-size-2xl);
+  }
+
+  .viewAll {
+    margin: var(--spacing-lg) 0;
+  }
 }

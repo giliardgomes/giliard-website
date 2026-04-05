@@ -71,7 +71,7 @@
     --color-bg: #111111;
     --color-text: #f5f5f5;
     --color-text-muted: #999999;
-    --color-accent: tomato;
+    --color-accent: #D03F25;
     --color-border: #222222;
   }
 }
@@ -127,7 +127,7 @@ input, textarea {
   --color-bg: #111111;
   --color-text: #fafafa;
   --color-text-muted: #999999;
-  --color-accent: tomato;
+  --color-accent: #D03F25;
   --color-border: #222222;
 }
 

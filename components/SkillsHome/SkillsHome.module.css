@@ -1,0 +1,58 @@
+.skillsHome {
+  padding: var(--spacing-2xl);
+  background-color: var(--color-bg);
+}
+
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-2xl);
+}
+
+.heading {
+  width: 160px;
+  flex-shrink: 0;
+  position: sticky;
+  top: var(--spacing-4xl);
+  padding-top: var(--spacing-lg);
+}
+
+.label {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-muted);
+  line-height: 1;
+}
+
+.list {
+  flex: 1;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .skillsHome {
+    padding: var(--spacing-lg);
+  }
+
+  .list {
+    width: 100%;
+  }
+
+  .wrapper {
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .heading {
+    width: auto;
+    padding-left: var(--spacing-sm);
+    padding-top: 0;
+  }
+}

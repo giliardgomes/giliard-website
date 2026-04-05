@@ -54,6 +54,50 @@
   }
 }
 
+.link {
+  text-transform: uppercase;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  line-height: normal;
+  color: var(--color-text-muted);
+  position: relative;
+  overflow: hidden;
+  padding-bottom: var(--spacing-xs);
+
+  &::after, &::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  &::after {
+    background-color: var(--color-text-muted);
+    left: 0px;
+    right: auto;
+  }
+
+  &::before {
+    left: -100%;
+    right: auto;
+    background-color: var(--color-accent);
+  }
+
+  &:hover {
+    &::after {
+      left: 100%;
+      right: auto;
+    }
+
+    &::before {
+      left: 0px;
+      right: auto;
+    }
+  }
+}
+
 .primary:hover,
 .secondary:hover,
 .tertiary:hover {

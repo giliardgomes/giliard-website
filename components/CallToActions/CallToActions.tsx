@@ -11,6 +11,7 @@ interface Props {
   primary?: ButtonProps
   secondary?: ButtonProps
   tertiary?: ButtonProps
+  link?: ButtonProps
   className?: string
 }
 
@@ -19,7 +20,7 @@ function CTAButton({
   variant,
 }: {
   button: ButtonProps
-  variant: 'primary' | 'secondary' | 'tertiary'
+  variant: 'primary' | 'secondary' | 'tertiary' | 'link'
 }) {
   const className = styles[variant]
 
@@ -47,12 +48,13 @@ function CTAButton({
   )
 }
 
-export default function CallToActions({ primary, secondary, tertiary, className }: Props) {
+export default function CallToActions({ primary, secondary, tertiary, link, className }: Props) {
   return (
     <div className={`${styles.callToActions} ${className ?? ''}`}>
       {primary && <CTAButton button={primary} variant="primary" />}
       {secondary && <CTAButton button={secondary} variant="secondary" />}
       {tertiary && <CTAButton button={tertiary} variant="tertiary" />}
+      {link && <CTAButton button={link} variant="link" />}
     </div>
   )
 }
