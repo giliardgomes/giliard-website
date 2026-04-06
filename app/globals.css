@@ -6,6 +6,10 @@
   /* Colors */
   --color-black: #000;
   --color-white: #fff;
+  color-scheme: light dark;
+
+  [data-theme='light'] { color-scheme: light; }
+  [data-theme='dark']  { color-scheme: dark; }
 
   /* Breakpoints */
   --bp-sm: 480px;
@@ -99,7 +103,6 @@ body {
   line-height: var(--line-height-normal);
   color: var(--color-text);
   background-color: var(--color-bg);
-  overflow-x: hidden;
 }
 
 img, video {

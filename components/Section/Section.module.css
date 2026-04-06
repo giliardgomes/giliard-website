@@ -1,6 +1,11 @@
 .section {
     position: relative;
-    min-height: 100svh;
+    min-height: auto;
     width: 100%;
     background-color: var(--color-bg);
+    padding-block: 10rem;
+
+    @media(min-width: 1280px) and (max-width: 1920px) {
+      min-height: 100vh;
+    }
 }

@@ -5,6 +5,10 @@
     color: var(--color-text-muted);
     line-height: var(--line-height-equal);
 
+    &[data-size="xs"] {
+        font-size: var(--font-size-xs);
+    }
+
     &[data-size="sm"] {
         font-size: var(--font-size-sm);
     }

@@ -16,7 +16,6 @@
 
   &::before {
         content: '';
-        background-color: rgba(128, 128, 128, 0.05);
         position: absolute;
         border-radius: 1rem;
         opacity: 0;

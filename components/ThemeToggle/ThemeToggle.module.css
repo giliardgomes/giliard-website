@@ -21,4 +21,12 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+
+  &:hover {
+    svg {
+      path, circle {
+        fill: var(--color-accent);
+      }
+    }
+  }
 }

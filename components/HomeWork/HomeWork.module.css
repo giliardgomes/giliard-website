@@ -4,7 +4,6 @@
     position: relative;
     z-index: 1;
     background-color: var(--color-bg);
-    min-height: 100svh;
     transition: opacity 600ms ease;
     padding: var(--spacing-2xl);
     display: flex;
@@ -97,7 +96,7 @@
 }
 
 .viewAll {
-  margin-top: var(--spacing-2xl);
+  margin: var(--spacing-2xl) auto 0;
 }
 
 /* Mobile */

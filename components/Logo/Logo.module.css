@@ -28,5 +28,13 @@ html[data-theme="dark"] {
                 fill: var(--color-white);
             }
         }
+
+        &:hover {
+            svg {
+                path {
+                    fill: var(--color-accent);
+                }
+            }
+        }
     }
 }
