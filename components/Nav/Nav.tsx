@@ -40,6 +40,7 @@ export default function Nav() {
     { name: 'Contact', href: '/contact' },
   ]
 
+  // Handle Resize
   useEffect(() => {
     setMounted(true)
     const checkRes = () => {
@@ -52,6 +53,19 @@ export default function Nav() {
     window.addEventListener('resize', checkRes)
     return () => window.removeEventListener('resize', checkRes)
   }, [])
+
+  // Handle Overflow Lock
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.documentElement.style.overflow = 'hidden'
+    } else {
+      document.documentElement.style.overflow = ''
+    }
+
+    return () => {
+      document.documentElement.style.overflow = ''
+    }
+  }, [isMenuOpen])
 
   return (
     <nav className={styles.nav}>
@@ -79,16 +93,35 @@ export default function Nav() {
               aria-label="Toggle Menu"
             >
               <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <line x1="0" y1="1" x2="20" y2="1" stroke="var(--color-text)" strokeWidth="2"/>
-                <line x1="0" y1="9" x2="20" y2="9" stroke="var(--color-text)" strokeWidth="2"/>
-                <line 
-                  x1={isMenuOpen ? "0" : "10"} 
-                  y1="17" 
+                <motion.line 
+                  initial={false}
+                  animate={{ x1: isMenuOpen ? 13.4 : 0 }}
                   x2="20" 
+                  y1="1" 
+                  y2="1" 
+                  stroke="var(--color-text)" 
+                  strokeWidth="2"
+                  transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
+                />
+                <motion.line 
+                  initial={false}
+                  animate={{ x1: isMenuOpen ? 10 : 0 }}
+                  x2="20" 
+                  y1="9" 
+                  y2="9" 
+                  stroke="var(--color-text)" 
+                  strokeWidth="2"
+                  transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
+                />
+                <motion.line 
+                  initial={false}
+                  animate={{ x1: isMenuOpen ? 0 : 10 }}
+                  x2="20" 
+                  y1="17" 
                   y2="17" 
                   stroke="var(--color-text)" 
-                  strokeWidth="2" 
-                  style={{ transition: '0.3s cubic-bezier(0.25, 1, 0.5, 1)' }}
+                  strokeWidth="2"
+                  transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
                 />
               </svg>
             </button>
@@ -105,9 +138,6 @@ export default function Nav() {
                 animate="visible"
                 exit="hidden"
               >
-                {/* We wrap links in a div or fragment since <ul> 
-                   isn't wrapping them in the portal root 
-                */}
                 <div className={styles.mobileLinkContainer}>
                   {links.map((link) => (
                     <motion.li 

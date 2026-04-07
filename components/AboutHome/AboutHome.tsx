@@ -7,22 +7,14 @@ import Section from '../Section/Section'
 import CapitalTag from '../CapitalTag/CapitalTag'
 import CallToActions from '../CallToActions/CallToActions'
 import styles from './AboutHome.module.css'
-import { useInView } from '@/hooks/useInView'
-
-const logoUber = '/images/logos/uber.svg'
-const logoToyota = '/images/logos/toyota.svg'
-const logoStripe = '/images/logos/stripe.svg'
-const logoMastercard = '/images/logos/mastercard.svg'
-const logoWalmart = '/images/logos/walmart.svg'
-const logoExpedia = '/images/logos/expedia.svg'
 
 const logos = [
-  { src: logoUber, alt: 'Uber', width: 46 },
-  { src: logoToyota, alt: 'Toyota', width: 97 },
-  { src: logoStripe, alt: 'Stripe', width: 39 },
-  { src: logoMastercard, alt: 'Mastercard', width: 93 },
-  { src: logoWalmart, alt: 'Walmart', width: 67 },
-  { src: logoExpedia, alt: 'Expedia', width: 80 },
+  { src: '/images/logos/uber.svg', alt: 'Uber', width: 46 },
+  { src: '/images/logos/toyota.svg', alt: 'Toyota', width: 97 },
+  { src: '/images/logos/stripe.svg', alt: 'Stripe', width: 39 },
+  { src: '/images/logos/mastercard.svg', alt: 'Mastercard', width: 93 },
+  { src: '/images/logos/walmart.svg', alt: 'Walmart', width: 67 },
+  { src: '/images/logos/expedia.svg', alt: 'Expedia', width: 80 },
 ]
 
 const containerVariants: Variants = {
@@ -37,10 +29,7 @@ const containerVariants: Variants = {
 }
 
 const textVariants: Variants = {
-  hidden: { 
-    opacity: 0, 
-    y: 20 
-  },
+  hidden: { opacity: 0, y: 20 },
   visible: { 
     opacity: 1, 
     y: 0,
@@ -52,10 +41,26 @@ const textVariants: Variants = {
 }
 
 export default function AboutHome() {
-  const { ref } = useInView(0.2, true)
+  const sectionRef = useRef<HTMLElement>(null)
   const logosRef = useRef<HTMLDivElement>(null)
+  const prevThemeRef = useRef<string | null>(null)
   const [animateLogs, setAnimateLogs] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          entry.target.classList.add(styles.exited)
+        } else {
+          entry.target.classList.remove(styles.exited)
+        }
+      },
+      { threshold: 0 }
+    )
+    if (sectionRef.current) observer.observe(sectionRef.current)
+    return () => observer.disconnect()
+  }, [])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -72,9 +77,22 @@ export default function AboutHome() {
     window.addEventListener('resize', checkMobile)
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
+
+  const handleDragStart = () => {
+    prevThemeRef.current = document.documentElement.getAttribute('data-theme')
+    document.documentElement.setAttribute('data-theme', 'dark')
+  }
+
+  const handleDragEnd = () => {
+    if (prevThemeRef.current !== null) {
+      document.documentElement.setAttribute('data-theme', prevThemeRef.current)
+    } else {
+      document.documentElement.removeAttribute('data-theme')
+    }
+  }
   
   return (
-    <Section id="about" className={styles.aboutHome} ref={ref}>
+    <Section id="about" className={styles.aboutHome} ref={sectionRef}>
       <motion.div 
         className={styles.wrapper}
         variants={containerVariants}
@@ -95,16 +113,14 @@ export default function AboutHome() {
                 Currently working at Quorum, an American tech company, leading provider of Government and Public Affairs software.
               </motion.p>
               <motion.div variants={textVariants}>
-                <CallToActions
-                  link={{ label: 'Read more', href: '/about' }}
-                />
+                <CallToActions link={{ label: 'Read more', href: '/about' }} />
               </motion.div>
             </div>
             
             <motion.div 
               className={styles.picture} 
               variants={textVariants}
-              style={{ position: 'relative', overflow: 'hidden', cursor: 'normal', backgroundColor: '#121212' }}
+              style={{ position: 'relative', backgroundColor: 'transparent' }}
             >
               <div 
                 style={{ 
@@ -114,66 +130,60 @@ export default function AboutHome() {
                   flexDirection: 'column',
                   alignItems: 'center', 
                   justifyContent: 'center', 
-                  background: 'radial-gradient(circle, #1a1a1a 0%, #0a0a0a 100%)', 
-                  color: '#ccff00', 
+                  background: 'transparent', 
+                  color: 'var(--color-accent)', 
                   textAlign: 'center',
                   padding: '24px',
-                  zIndex: 0
+                  zIndex: 0,
+                  userSelect: 'none'
                 }}
               >
-                <svg 
-                  width="80" 
-                  height="60" 
-                  viewBox="209 267 358 262" 
-                  fill="currentColor" 
-                  style={{ marginBottom: '16px', opacity: 0.9 }}
-                >
-                  <g>
-                    <path d="m 357.85714,268.79075 23.39286,18.57143 0,35.71429 -56.96429,59.64285 -6.42857,0 -42.67857,-20.35714 0,-6.42857 92.14286,-35.35714 0,-8.21429 -110.89286,25 -7.5,0 -38.21428,-38.92857 3.57142,-8.92857 157.14286,0 z" />
-                    <path d="m 363.57143,357.00504 -40.35715,49.28571 40.00001,-27.85714 -18.92857,56.42857 22.41071,-30.71428 0,98.39285 13.83929,25.17857 0,-147.67857 c -9.31467,-3.10369 -15.26628,-10.4112 -16.96429,-23.03571 z" />
-                    <path d="m 418.58929,268.79075 -23.39286,18.57143 0,35.71429 56.96429,59.64285 6.42857,0 42.67857,-20.35714 0,-6.42857 -92.14286,-35.35714 0,-8.21429 110.89286,25 7.5,0 38.21428,-38.92857 -3.57142,-8.92857 -157.14286,0 z" />
-                    <path d="m 412.875,357.00504 40.35715,49.28571 -40.00001,-27.85714 18.92857,56.42857 -22.41071,-30.71428 0,98.39285 -13.83929,25.17857 0,-147.67857 c 9.31467,-3.10369 15.26628,-10.4112 16.96429,-23.03571 z" />
-                  </g>
+                <svg width="80" height="60" viewBox="209 267 358 262" fill="currentColor" style={{ marginBottom: '16px', opacity: 0.9 }}>
+                  <path d="m 357.85714,268.79075 23.39286,18.57143 0,35.71429 -56.96429,59.64285 -6.42857,0 -42.67857,-20.35714 0,-6.42857 92.14286,-35.35714 0,-8.21429 -110.89286,25 -7.5,0 -38.21428,-38.92857 3.57142,-8.92857 157.14286,0 z" />
+                  <path d="m 363.57143,357.00504 -40.35715,49.28571 40.00001,-27.85714 -18.92857,56.42857 22.41071,-30.71428 0,98.39285 13.83929,25.17857 0,-147.67857 c -9.31467,-3.10369 -15.26628,-10.4112 -16.96429,-23.03571 z" />
+                  <path d="m 418.58929,268.79075 -23.39286,18.57143 0,35.71429 56.96429,59.64285 6.42857,0 42.67857,-20.35714 0,-6.42857 -92.14286,-35.35714 0,-8.21429 110.89286,25 7.5,0 38.21428,-38.92857 -3.57142,-8.92857 -157.14286,0 z" />
+                  <path d="m 412.875,357.00504 40.35715,49.28571 -40.00001,-27.85714 18.92857,56.42857 -22.41071,-30.71428 0,98.39285 -13.83929,25.17857 0,-147.67857 c 9.31467,-3.10369 15.26628,-10.4112 16.96429,-23.03571 z" />
                 </svg>
-
-                <p style={{ margin: 0, fontWeight: '700', fontSize: '0.7rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#ccff00', opacity: 0.9 }}>
-                  When you're lost in the darkness
-                </p>
-                <p style={{ margin: '4px 0 0', fontWeight: '800', fontSize: '0.9rem', color: '#fff', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                  Look for the light.
-                </p>
+                <p style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-text)', opacity: 0.7 }}>When you're lost in the darkness</p>
+                <p style={{ margin: 'var(--spacing-xs) 0 0', fontWeight: '800', fontSize: 'var(--font-size-md)', color: 'var(--color-text)', fontFamily: 'var(--font-serif)' }}>Look for the light.</p>
               </div>
 
               <motion.div 
                 drag 
                 dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-                dragElastic={0.7}
-                whileDrag={{ scale: 1.05, rotate: -1, zIndex: 10 }}
-                style={{ 
-                  position: 'relative', 
-                  width: '100%', 
-                  height: '100%', 
-                  zIndex: 1,
-                  touchAction: 'none'
-                }}
+                dragElastic={0.6}
+                whileDrag={{ scale: 1.05, rotate: -2, zIndex: 10 }}
+                onDragStart={handleDragStart}
+                onDragEnd={handleDragEnd}
+                style={{ position: 'relative', width: '100%', height: '100%', zIndex: 1, touchAction: 'none' }}
               >
                 <Image
                   src="https://giliard.com.br/wp-content/themes/shaped/img/hero.png"
                   alt="Giliard Gomes"
                   fill
+                  priority
                   style={{ objectFit: 'cover', pointerEvents: 'none' }}
                 />
               </motion.div>
             </motion.div>
           </div>
         </div>
-        <motion.div className={styles.divider} variants={textVariants}></motion.div>
+
+        <motion.div className={styles.divider} variants={textVariants} />
+
         <motion.div className={styles.trusted} variants={textVariants}>
           <CapitalTag dataSize="xs" content="Trusted by teams at" />
           <div className={styles.logos} ref={logosRef}>
             <div className={styles.logosTrack} data-animate={animateLogs}>
               {(isMobile ? [...logos, ...logos] : logos).map((logo, i) => (
-                <img key={isMobile ? `${logo.alt}-${i}` : logo.alt} src={logo.src} alt={logo.alt} height={16} width={logo.width} className={styles.logo} />
+                <img 
+                  key={isMobile ? `${logo.alt}-${i}` : logo.alt} 
+                  src={logo.src} 
+                  alt={logo.alt} 
+                  height={16} 
+                  width={logo.width} 
+                  className={styles.logo} 
+                />
               ))}
             </div>
           </div>

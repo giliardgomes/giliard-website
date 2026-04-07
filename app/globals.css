@@ -19,8 +19,8 @@
   --bp-2xl: 1440px;
 
   /* Typography */
-  --font-sans: var(--font-serif), Georgia, serif;
-  --font-sans: var(--font-sans), Arial, sans-serif;
+  --font-serif: var(--font-serif), 'Young Serif' ,Georgia, serif;
+  --font-sans: var(--font-sans), 'Inter Tight', Arial, sans-serif;
 
   --font-size-xs: 0.75rem;    /* 12px */
   --font-size-sm: 0.875rem;   /* 14px */

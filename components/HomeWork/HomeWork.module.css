@@ -14,9 +14,9 @@
         position: absolute;
         width: 100%;
         left: 0px;
-        height: 400px;
+        height: 10rem;
         background: linear-gradient(to bottom, transparent, var(--color-bg));
-        top: -400px;
+        top: -10rem;
         opacity: 0;
         transition: all 0.3s ease-in-out;
         pointer-events: none;

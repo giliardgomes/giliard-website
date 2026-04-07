@@ -1,10 +1,9 @@
 .aboutHome {
-  padding: var(--spacing-2xl) 0;
+  padding: var(--spacing-4xl) 0;
   background-color: var(--color-bg);
   position: relative;
   display: flex;
   align-items: center;
-  overflow: hidden;
   position: sticky;
   top: 0px;
   padding-bottom: 10rem;
@@ -118,12 +117,6 @@
     transition: all 0.3s ease-in-out;
   }
 
-  &:hover {
-    &::before {
-      opacity: .8;
-    }
-  }
-
   @media(max-width: 1280px) {
     &::before {
       right: -1.5rem;
@@ -147,7 +140,15 @@
   animation: none;
 }
 
+.exited {
+  position: relative;
+}
+
 @media (max-width: 1024px) {
+  .aboutHome {
+    overflow-x: hidden;
+  }
+
   .label {
     padding-left: var(--spacing-lg);
   }

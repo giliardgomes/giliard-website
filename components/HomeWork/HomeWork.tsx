@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion, Variants } from 'framer-motion'
@@ -25,24 +26,32 @@ interface Props {
   cases: CaseStudy[]
 }
 
+const wrapperVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1,
+    },
+  },
+}
+
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.25, // Specifically set to 0.25s as requested
+      staggerChildren: 0.25,
       delayChildren: 0.1,
     },
   },
 }
 
 const cardVariants: Variants = {
-  hidden: { 
-    opacity: 0, 
-    y: 40 
-  },
-  visible: { 
-    opacity: 1, 
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
     y: 0,
     transition: {
       duration: 0.8,
@@ -51,7 +60,7 @@ const cardVariants: Variants = {
   },
 }
 
-const typewriterVariants: Variants = {
+const titleVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -68,18 +77,33 @@ const letterVariants: Variants = {
 
 export default function HomeWork({ cases }: Props) {
   const headingText = "Highlighted work"
+  const sectionRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add(styles.visible)
+        }
+      },
+      { threshold: 0.1 }
+    )
+    if (sectionRef.current) observer.observe(sectionRef.current)
+    return () => observer.disconnect()
+  }, [])
 
   return (
-    <Section id="homework" className={styles.homeWork}>
-      <motion.div 
+    <Section id="homework" className={styles.homeWork} ref={sectionRef}>
+      <motion.div
         className={styles.wrapper}
+        variants={wrapperVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.1 }}
       >
-        <motion.p 
+        <motion.p
           className={styles.sectionTitle}
-          variants={typewriterVariants}
+          variants={titleVariants}
         >
           {headingText.split("").map((letter, index) => (
             <motion.span key={index} variants={letterVariants}>
@@ -88,7 +112,7 @@ export default function HomeWork({ cases }: Props) {
           ))}
         </motion.p>
 
-        <motion.div 
+        <motion.div
           className={styles.posts}
           variants={containerVariants}
         >

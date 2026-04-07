@@ -21,6 +21,7 @@
   text-decoration: none;
   color: var(--color-text);
   position: relative;
+  transition: color 0.3s ease-in-out;
 }
 
 .link::before {
@@ -53,8 +54,44 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-end;
-  background-color: var(--color-bg);
   padding-bottom: var(--spacing-4xl);
+  z-index: 4;
+
+  &::before {
+    content: '';
+    width: 100%;
+    background-color: var(--color-bg);
+    animation: slideIn 0.3s ease-in-out forwards;
+    transform-origin: top;
+    position: absolute;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+  }
+
+  &::after {
+    content: '';
+    background-size: 36px 36px;
+    background-image: radial-gradient(circle, var(--color-text) 1px, transparent 1px);
+    opacity: .4;
+    pointer-events: none;
+    width: 100%;
+    top: 0;
+    position: absolute;
+    height: 50%;
+    left: 0;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
 }
 
 .mobileLinkContainer {
@@ -67,7 +104,7 @@
 }
 
 .mobileMenu .link {
-  font-size: var(--font-size-2xl);
+  font-size: var(--font-size-3xl);
 }
 
 .menuButton {
@@ -81,4 +118,16 @@
   position: relative;
   width: 20px;
   height: 20px;
+
+  svg {
+    transition: all 0.3s ease-in-out;
+
+    line {
+      transition: all 0.3s ease-in-out;
+    }
+  }
+}
+
+.mobileLinkContainer {
+  width: 100%;
 }
