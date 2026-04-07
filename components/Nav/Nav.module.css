@@ -6,7 +6,7 @@
 .list {
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
+  gap: var(--spacing-lg);
   list-style: none;
   margin: 0;
   padding: 0;
@@ -16,6 +16,14 @@
   font-size: var(--font-size-md);
   text-decoration: none;
   color: var(--color-text);
+  transition: color 0.3s ease-in-out, text-decoration 0.3s ease-in-out;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 4px;
+
+  &:hover {
+    color: var(--color-accent);
+    text-decoration: underline;
+  }
 }
 
 .link:hover {
