@@ -7,6 +7,7 @@
   overflow: hidden;
   position: sticky;
   top: 0px;
+  padding-bottom: 10rem;
 }
 
 .wrapper {
@@ -159,6 +160,7 @@
 @media (max-width: 768px) {
   .aboutHome {
     padding: var(--spacing-lg) 0;
+    position: relative;
   }
 
   .aboutMe {

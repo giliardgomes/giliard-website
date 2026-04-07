@@ -1,6 +1,6 @@
 .nav {
-    display: flex;
-    pointer-events: all;
+  display: flex;
+  pointer-events: all;
 }
 
 .list {
@@ -12,20 +12,73 @@
   padding: 0;
 }
 
+.listItem {
+  list-style: none;
+}
+
 .link {
   font-size: var(--font-size-md);
   text-decoration: none;
   color: var(--color-text);
-  transition: color 0.3s ease-in-out, text-decoration 0.3s ease-in-out;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 4px;
+  position: relative;
+}
 
-  &:hover {
-    color: var(--color-accent);
-    text-decoration: underline;
-  }
+.link::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-accent);
+  left: 0;
+  bottom: -2px;
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
+  transform-origin: right;
 }
 
 .link:hover {
   color: var(--color-accent);
+}
+
+.link:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.mobileMenu {
+  position: fixed;
+  inset: 0;
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  background-color: var(--color-bg);
+  padding-bottom: var(--spacing-4xl);
+}
+
+.mobileLinkContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mobileMenu .link {
+  font-size: var(--font-size-2xl);
+}
+
+.menuButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  position: relative;
+  width: 20px;
+  height: 20px;
 }

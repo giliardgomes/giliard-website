@@ -1,8 +1,8 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-
 import Image from 'next/image'
+import { motion, Variants } from 'framer-motion'
 import Section from '../Section/Section'
 import CapitalTag from '../CapitalTag/CapitalTag'
 import CallToActions from '../CallToActions/CallToActions'
@@ -25,9 +25,34 @@ const logos = [
   { src: logoExpedia, alt: 'Expedia', width: 80 },
 ]
 
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.2,
+    },
+  },
+}
+
+const textVariants: Variants = {
+  hidden: { 
+    opacity: 0, 
+    y: 20 
+  },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.25, 1, 0.5, 1],
+    },
+  },
+}
+
 export default function AboutHome() {
   const { ref } = useInView(0.2, true)
-
   const logosRef = useRef<HTMLDivElement>(null)
   const [animateLogs, setAnimateLogs] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
@@ -50,33 +75,100 @@ export default function AboutHome() {
   
   return (
     <Section id="about" className={styles.aboutHome} ref={ref}>
-      <div className={styles.wrapper}>
+      <motion.div 
+        className={styles.wrapper}
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
+      >
         <div className={styles.aboutMe}>
-          <h3 className={styles.label}>About</h3>
+          <motion.h3 className={styles.label} variants={textVariants}>
+            About
+          </motion.h3>
           <div className={styles.content}>
             <div className={styles.text}>
-              <p>
+              <motion.p variants={textVariants}>
                 Working for over a decade shaping digital products — 8+ years focused on user experience, design systems, and front-end craft.
-              </p>
-              <p>
+              </motion.p>
+              <motion.p variants={textVariants}>
                 Currently working at Quorum, an American tech company, leading provider of Government and Public Affairs software.
-              </p>
-              <CallToActions
-                link={{ label: 'Read more', href: '/about' }}
-              />
+              </motion.p>
+              <motion.div variants={textVariants}>
+                <CallToActions
+                  link={{ label: 'Read more', href: '/about' }}
+                />
+              </motion.div>
             </div>
-            <div className={styles.picture}>
-              <Image
-                src="https://giliard.com.br/wp-content/themes/shaped/img/hero.png"
-                alt="Giliard Gomes"
-                fill
-                style={{ objectFit: 'cover' }}
-              />
-            </div>
+            
+            <motion.div 
+              className={styles.picture} 
+              variants={textVariants}
+              style={{ position: 'relative', overflow: 'hidden', cursor: 'normal', backgroundColor: '#121212' }}
+            >
+              <div 
+                style={{ 
+                  position: 'absolute', 
+                  inset: 0, 
+                  display: 'flex', 
+                  flexDirection: 'column',
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  background: 'radial-gradient(circle, #1a1a1a 0%, #0a0a0a 100%)', 
+                  color: '#ccff00', 
+                  textAlign: 'center',
+                  padding: '24px',
+                  zIndex: 0
+                }}
+              >
+                <svg 
+                  width="80" 
+                  height="60" 
+                  viewBox="209 267 358 262" 
+                  fill="currentColor" 
+                  style={{ marginBottom: '16px', opacity: 0.9 }}
+                >
+                  <g>
+                    <path d="m 357.85714,268.79075 23.39286,18.57143 0,35.71429 -56.96429,59.64285 -6.42857,0 -42.67857,-20.35714 0,-6.42857 92.14286,-35.35714 0,-8.21429 -110.89286,25 -7.5,0 -38.21428,-38.92857 3.57142,-8.92857 157.14286,0 z" />
+                    <path d="m 363.57143,357.00504 -40.35715,49.28571 40.00001,-27.85714 -18.92857,56.42857 22.41071,-30.71428 0,98.39285 13.83929,25.17857 0,-147.67857 c -9.31467,-3.10369 -15.26628,-10.4112 -16.96429,-23.03571 z" />
+                    <path d="m 418.58929,268.79075 -23.39286,18.57143 0,35.71429 56.96429,59.64285 6.42857,0 42.67857,-20.35714 0,-6.42857 -92.14286,-35.35714 0,-8.21429 110.89286,25 7.5,0 38.21428,-38.92857 -3.57142,-8.92857 -157.14286,0 z" />
+                    <path d="m 412.875,357.00504 40.35715,49.28571 -40.00001,-27.85714 18.92857,56.42857 -22.41071,-30.71428 0,98.39285 -13.83929,25.17857 0,-147.67857 c 9.31467,-3.10369 15.26628,-10.4112 16.96429,-23.03571 z" />
+                  </g>
+                </svg>
+
+                <p style={{ margin: 0, fontWeight: '700', fontSize: '0.7rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#ccff00', opacity: 0.9 }}>
+                  When you're lost in the darkness
+                </p>
+                <p style={{ margin: '4px 0 0', fontWeight: '800', fontSize: '0.9rem', color: '#fff', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  Look for the light.
+                </p>
+              </div>
+
+              <motion.div 
+                drag 
+                dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
+                dragElastic={0.7}
+                whileDrag={{ scale: 1.05, rotate: -1, zIndex: 10 }}
+                style={{ 
+                  position: 'relative', 
+                  width: '100%', 
+                  height: '100%', 
+                  zIndex: 1,
+                  touchAction: 'none'
+                }}
+              >
+                <Image
+                  src="https://giliard.com.br/wp-content/themes/shaped/img/hero.png"
+                  alt="Giliard Gomes"
+                  fill
+                  style={{ objectFit: 'cover', pointerEvents: 'none' }}
+                />
+              </motion.div>
+            </motion.div>
           </div>
         </div>
-        <div className={styles.divider}></div>
-        <div className={styles.trusted}>
+        <motion.div className={styles.divider} variants={textVariants}></motion.div>
+        <motion.div className={styles.trusted} variants={textVariants}>
           <CapitalTag dataSize="xs" content="Trusted by teams at" />
           <div className={styles.logos} ref={logosRef}>
             <div className={styles.logosTrack} data-animate={animateLogs}>
@@ -85,8 +177,8 @@ export default function AboutHome() {
               ))}
             </div>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </Section>
   )
 }

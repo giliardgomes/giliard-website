@@ -89,10 +89,28 @@
   letter-spacing: -0.1px;
   color: var(--color-text);
   transition: color var(--transition-fast);
+  display: inline;
 }
 
-.postCard:hover .title {
+.title {
+  display: inline;
+  margin: 0;
+}
+
+.titleText {
+  display: inline;
+  color: var(--color-text);
+  text-decoration: none;
+  background-image: linear-gradient(var(--color-accent), var(--color-accent));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 4px;
+  transition: background-size 0.6s cubic-bezier(0.25, 1, 0.5, 1), color 0.3s ease;
+}
+
+.postCard:hover .titleText {
   color: var(--color-accent);
+  background-size: 100% 4px;
 }
 
 .viewAll {
@@ -103,6 +121,10 @@
 @media (max-width: 768px) {
   .homeWork {
     padding: var(--spacing-lg);
+
+    &::before {
+      display: none;
+    }
   }
 
   .posts {

@@ -54,3 +54,9 @@
     padding: var(--spacing-sm) var(--spacing-xl);
   }
 }
+
+@media (max-width: 768px) {
+  .stackHome {
+    padding: var(--spacing-xl) 0;
+  }
+}

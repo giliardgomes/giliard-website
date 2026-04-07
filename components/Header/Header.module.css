@@ -23,6 +23,6 @@
 
 @media (max-width: 768px) {
   .inner {
-    padding: var(--spacing-md) var(--spacing-xl);
+    padding: var(--spacing-md) var(--spacing-lg);
   }
 }

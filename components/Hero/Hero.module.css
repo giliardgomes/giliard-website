@@ -9,7 +9,6 @@
   min-height: 100vh;
   scroll-snap-align: start;
   scroll-snap-stop: always;
-  margin-bottom: var(--spacing-2xl);
 
   &::before {
     content: '';
