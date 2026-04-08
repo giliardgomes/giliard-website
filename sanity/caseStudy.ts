@@ -27,41 +27,20 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'myRole', // Matches your existing data
+      title: 'My Role',
+      type: 'string',
+    }),
+    defineField({
+      name: 'year', // Added this field so you can edit it in Sanity
+      title: 'Year',
+      type: 'string',
+    }),
+    defineField({
       name: 'coverImage',
       title: 'Cover Image',
       type: 'image',
-      options: {
-        hotspot: true,
-      },
-    }),
-    defineField({
-      name: 'tags',
-      title: 'Tags',
-      type: 'array',
-      of: [{ type: 'string' }],
-      options: {
-        layout: 'tags',
-      },
-    }),
-    defineField({
-      name: 'summary',
-      title: 'Summary',
-      type: 'text',
-      rows: 3,
-    }),
-    defineField({
-      name: 'body',
-      title: 'Body',
-      type: 'array',
-      of: [
-        {
-          type: 'block',
-        },
-        {
-          type: 'image',
-          options: { hotspot: true },
-        },
-      ],
+      options: { hotspot: true },
     }),
     defineField({
       name: 'featured',
@@ -70,9 +49,54 @@ export default defineType({
       initialValue: false,
     }),
     defineField({
+      name: 'tags',
+      title: 'Tags',
+      type: 'array',
+      of: [{ type: 'string' }],
+      options: { layout: 'tags' },
+    }),
+    defineField({
+      name: 'summary',
+      title: 'Summary',
+      type: 'text',
+      rows: 3,
+    }),
+    defineField({
+      name: 'tools',
+      title: 'Tools & Software',
+      type: 'array',
+      of: [{ type: 'string' }],
+      options: {
+        list: [
+          { title: 'Figma', value: 'figma' },
+          { title: 'Adobe Creative Suite', value: 'adobe-cs' },
+          { title: 'Framer', value: 'framer' },
+          { title: 'Principle', value: 'principle' },
+          { title: 'VS Code', value: 'vscode' },
+          { title: 'React / Next.js', value: 'react' },
+          { title: 'Tailwind CSS', value: 'tailwind' },
+          { title: 'GitHub', value: 'github' },
+          { title: 'Jira', value: 'jira' },
+          { title: 'Linear', value: 'linear' },
+          { title: 'Notion', value: 'notion' },
+          { title: 'Miro / FigJam', value: 'miro' },
+        ],
+      },
+    }),
+    defineField({
+      name: 'body',
+      title: 'Body',
+      type: 'array',
+      of: [
+        { type: 'block' },
+        { type: 'image', options: { hotspot: true } },
+      ],
+    }),
+    defineField({
       name: 'publishedAt',
       title: 'Published At',
       type: 'datetime',
+      initialValue: () => new Date().toISOString(),
     }),
   ],
   preview: {
@@ -84,8 +108,8 @@ export default defineType({
     prepare(selection) {
       const { title, client, media } = selection
       return {
-        title,
-        subtitle: client,
+        title: title || 'Untitled',
+        subtitle: client || 'No Client',
         media,
       }
     },

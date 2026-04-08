@@ -5,6 +5,7 @@
   right: 0;
   z-index: 5;
   pointer-events: none;
+  height: var(--header-height);
 }
 
 [data-theme='dark'] .header {
@@ -21,7 +22,7 @@
   mix-blend-mode: difference;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .inner {
     padding: var(--spacing-md) var(--spacing-lg);
   }

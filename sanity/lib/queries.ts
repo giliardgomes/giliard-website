@@ -21,10 +21,11 @@ export const CASE_STUDY_BY_SLUG_QUERY = defineQuery(`
     slug,
     client,
     summary,
-    tags,
     coverImage,
     body,
-    publishedAt
+    tools,
+    myRole, // Ensure this matches the schema name
+    year    // Now this will correctly fetch the year
   }
 `)
 

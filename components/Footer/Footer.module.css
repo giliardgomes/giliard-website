@@ -126,6 +126,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    line-height: 1;
 }
 
 .backToTop {

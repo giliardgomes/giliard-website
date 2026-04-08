@@ -12,18 +12,18 @@ export default function Footer() {
       behavior: 'smooth',
     })
     
-    // Accessibility: Move focus to a top-level element
     const topElement = document.getElementById('top') || document.body
     topElement.setAttribute('tabindex', '-1')
     topElement.focus({ preventScroll: true })
   }
+
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer className={styles.footer} aria-labelledby="footer-navigation">      
       <div className={styles.wrapper}>
         <div className={styles.top}>
 
-          {/* Browse Section */}
           <nav className={styles.footerSection} aria-label="Quick links">
             <h3>Browse</h3>
             <ul className={styles.linksFooter}>
@@ -35,7 +35,6 @@ export default function Footer() {
             </ul>
           </nav>
           
-          {/* Contact Section */}
           <nav className={styles.footerSection} aria-label="Contact information">
             <h3>Get in touch</h3>
             <ul className={styles.linksFooter}>
@@ -47,7 +46,6 @@ export default function Footer() {
             </ul>
           </nav>
 
-          {/* Social Section */}
           <nav className={styles.footerSection} aria-label="Social media">
             <h3>Let's connect</h3>
             <ul className={`${styles.linksFooter} ${styles.socialLinks}`}>
@@ -72,16 +70,41 @@ export default function Footer() {
                     </svg>
                   </a>
                 </li>
+                <li>
+                  <a 
+                    href='https://bsky.app' 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className={styles.socialLink} 
+                    aria-label='Bluesky'
+                  >
+                    <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3.50253 1.94477C5.32398 3.31047 7.28265 6.08563 8 7.57634C8.71735 6.08875 10.676 3.31359 12.4975 1.94477C13.8105 0.957209 15.9376 0.194665 15.9376 2.62606C15.9376 3.11046 15.66 6.70441 15.4979 7.28882C14.9302 9.31394 12.8655 9.83272 11.0285 9.51708C14.2378 10.064 15.055 11.8766 13.2897 13.6892C9.93996 17.1331 8.47719 12.8266 8.10292 11.7235C8.0499 11.5703 8.02183 11.4797 8 11.4797C7.97817 11.4797 7.9501 11.5734 7.89708 11.7235C7.52281 12.8266 6.05692 17.1331 2.71033 13.6892C0.948148 11.8766 1.76218 10.064 4.97154 9.51708C3.1345 9.83272 1.06979 9.31394 0.505263 7.2857C0.339961 6.70129 0.0623779 3.10733 0.0623779 2.62293C0.0623779 0.19154 2.18947 0.954084 3.50253 1.94164V1.94477Z" fill="#FAFAFA"/>
+                    </svg>
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href='https://dribbble.com' 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className={styles.socialLink} 
+                    aria-label='Dribble'
+                  >
+                    <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M7.75 0C3.47813 0 0 3.47813 0 7.75C0 12.0219 3.47813 15.5 7.75 15.5C12.0219 15.5 15.5 12.0219 15.5 7.75C15.5 3.47813 12.0219 0 7.75 0ZM12.875 3.575C13.7969 4.7 14.3562 6.1375 14.3687 7.7C14.15 7.65312 11.9625 7.20938 9.75937 7.4875C9.57812 7.05 9.40938 6.6625 9.17813 6.1875C11.625 5.1875 12.7344 3.76562 12.875 3.57812V3.575ZM12.1375 2.80938C12.0188 2.97813 11.0219 4.31875 8.66875 5.2C7.58437 3.20625 6.38125 1.56875 6.2 1.325C8.3 0.81875 10.5125 1.36563 12.1406 2.80938H12.1375ZM4.93437 1.76875C5.10938 2.00937 6.29062 3.64688 7.3875 5.59688C4.29062 6.41875 1.5625 6.40625 1.26875 6.40312C1.7 4.35 3.08437 2.64375 4.93437 1.76875ZM1.13125 7.75937C1.13125 7.69062 1.13125 7.625 1.13437 7.55625C1.425 7.5625 4.63125 7.60313 7.9375 6.61562C8.12813 6.9875 8.30938 7.3625 8.475 7.7375C6.08125 8.4125 3.90625 10.3469 2.83437 12.1844C1.775 11.0125 1.13125 9.45937 1.13125 7.75937ZM3.6875 12.9812C4.37813 11.5687 6.25625 9.74375 8.925 8.83125C9.85313 11.2469 10.2375 13.2719 10.3375 13.85C8.20937 14.7563 5.65 14.5094 3.6875 12.9781V12.9812ZM11.45 13.2469C11.3812 12.8438 11.0312 10.9062 10.1625 8.52812C12.2375 8.19687 14.0594 8.74063 14.2844 8.8125C13.9906 10.6531 12.9312 12.2437 11.4469 13.25L11.45 13.2469Z" fill="#FAFAFA"/>
+                    </svg>
+                  </a>
+                </li>
             </ul>
           </nav>
 
         </div>
         <div className={styles.bottom}>
-          {/* Passed onClick and href down to Logo */}
           <Logo height={32} width="auto" href='#top' onClick={scrollToTop} />
           
           <div className={styles.copyright}>
-            <span>© 2026</span>
+            <span>Designed and Coded by Giliard Gomes © {currentYear}</span>
             <a 
               className={styles.backToTop} 
               href='#top' 
