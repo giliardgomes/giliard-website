@@ -5,9 +5,9 @@ interface Props {
   className?: string
 }
 
-export default function Main({ children }: Props) {
+export default function Main({ children, className }: Props) {
   return (
-    <main className={styles.main}>
+    <main className={`${styles.main} ${className || ''}`}>
       {children}
     </main>
   )

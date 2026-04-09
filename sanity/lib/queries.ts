@@ -24,8 +24,16 @@ export const CASE_STUDY_BY_SLUG_QUERY = defineQuery(`
     coverImage,
     body,
     tools,
-    myRole, // Ensure this matches the schema name
-    year    // Now this will correctly fetch the year
+    myRole,
+    year,
+    "prev": *[_type == "caseStudy" && _createdAt < ^._createdAt] | order(_createdAt desc)[0] {
+      title,
+      "slug": slug.current
+    },
+    "next": *[_type == "caseStudy" && _createdAt > ^._createdAt] | order(_createdAt asc)[0] {
+      title,
+      "slug": slug.current
+    }
   }
 `)
 

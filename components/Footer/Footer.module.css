@@ -127,6 +127,20 @@
     align-items: center;
     width: 100%;
     line-height: 1;
+    font-family: monospace;
+
+    &:hover {
+        span {
+            &::before {
+                content: '<';
+                margin-right: 2px;
+            }
+
+            &::after {
+                content: ' />';
+            }
+        }
+    }
 }
 
 .backToTop {
@@ -232,6 +246,19 @@ html[data-theme='light'] {
         svg {
             height: var(--spacing-xl);
             width: auto;
+        }
+    }
+
+    .copyright {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-lg);
+    }
+
+    .backToTop {
+        &::before {
+            right: auto;
+            left: var(--spacing-xl);
         }
     }
 }

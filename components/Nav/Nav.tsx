@@ -11,14 +11,14 @@ const containerVariants: Variants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.25,
+      staggerChildren: 0.25, // Delay between each link
+      delayChildren: 0.1,
     },
   },
 }
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 10 },
+  hidden: { opacity: 0, y: 15 },
   visible: { 
     opacity: 1, 
     y: 0, 
@@ -40,7 +40,6 @@ export default function Nav() {
     { name: 'Contact', href: '/contact' },
   ]
 
-  // Handle Resize
   useEffect(() => {
     setMounted(true)
     const checkRes = () => {
@@ -54,22 +53,16 @@ export default function Nav() {
     return () => window.removeEventListener('resize', checkRes)
   }, [])
 
-  // Handle Overflow Lock
   useEffect(() => {
-    if (isMenuOpen) {
-      document.documentElement.style.overflow = 'hidden'
-    } else {
-      document.documentElement.style.overflow = ''
-    }
-
-    return () => {
-      document.documentElement.style.overflow = ''
-    }
+    document.documentElement.style.overflow = isMenuOpen ? 'hidden' : ''
+    return () => { document.documentElement.style.overflow = '' }
   }, [isMenuOpen])
 
   return (
     <nav className={styles.nav}>
+      {/* Desktop/Header List */}
       <motion.ul 
+        key={isDesktop ? 'desktop' : 'mobile-header'}
         className={styles.list}
         variants={containerVariants}
         initial="hidden"
@@ -96,9 +89,7 @@ export default function Nav() {
                 <motion.line 
                   initial={false}
                   animate={{ x1: isMenuOpen ? 13.4 : 0 }}
-                  x2="20" 
-                  y1="1" 
-                  y2="1" 
+                  x2="20" y1="1" y2="1" 
                   stroke="var(--color-text)" 
                   strokeWidth="2"
                   transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
@@ -106,9 +97,7 @@ export default function Nav() {
                 <motion.line 
                   initial={false}
                   animate={{ x1: isMenuOpen ? 10 : 0 }}
-                  x2="20" 
-                  y1="9" 
-                  y2="9" 
+                  x2="20" y1="9" y2="9" 
                   stroke="var(--color-text)" 
                   strokeWidth="2"
                   transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
@@ -116,9 +105,7 @@ export default function Nav() {
                 <motion.line 
                   initial={false}
                   animate={{ x1: isMenuOpen ? 0 : 10 }}
-                  x2="20" 
-                  y1="17" 
-                  y2="17" 
+                  x2="20" y1="17" y2="17" 
                   stroke="var(--color-text)" 
                   strokeWidth="2"
                   transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
@@ -127,35 +114,42 @@ export default function Nav() {
             </button>
           </motion.li>
         )}
+      </motion.ul>
 
-        {mounted && createPortal(
-          <AnimatePresence>
-            {!isDesktop && isMenuOpen && (
-              <motion.div 
-                className={styles.mobileMenu}
+      {/* Mobile Portal List */}
+      {mounted && createPortal(
+        <AnimatePresence>
+          {!isDesktop && isMenuOpen && (
+            <motion.div 
+              className={styles.mobileMenu}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              {/* This motion.ul MUST be the direct parent of the li for stagger to work */}
+              <motion.ul 
+                className={styles.mobileLinkContainer}
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
                 exit="hidden"
               >
-                <div className={styles.mobileLinkContainer}>
-                  {links.map((link) => (
-                    <motion.li 
-                      key={link.name} 
-                      variants={itemVariants}
-                      onClick={() => setIsMenuOpen(false)}
-                      className={styles.listItem}
-                    >
-                      <a href={link.href} className={styles.link}>{link.name}</a>
-                    </motion.li>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>,
-          document.body
-        )}
-      </motion.ul>
+                {links.map((link) => (
+                  <motion.li 
+                    key={`mobile-${link.name}`} 
+                    variants={itemVariants}
+                    onClick={() => setIsMenuOpen(false)}
+                    className={styles.listItem}
+                  >
+                    <a href={link.href} className={styles.link}>{link.name}</a>
+                  </motion.li>
+                ))}
+              </motion.ul>
+            </motion.div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </nav>
   )
 }

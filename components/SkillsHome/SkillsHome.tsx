@@ -6,13 +6,34 @@ import Collapse from '../Collapse/Collapse'
 import styles from './SkillsHome.module.css'
 
 const skills = [
-  { title: 'Design System', content: 'Building scalable, token-based design systems from scratch — component libraries, documentation, and cross-team adoption strategies.' },
-  { title: 'UI/UX Design', content: 'End-to-end product design from discovery to high-fidelity prototypes. Focused on clarity, consistency, and delightful interactions.' },
-  { title: 'UX Research', content: 'User interviews, usability testing, and data-informed design decisions. Turning insights into actionable design improvements.' },
-  { title: 'Front-end Development', content: 'React, Next.js, TypeScript, and CSS — bridging the gap between design and engineering with production-ready implementations.' },
-  { title: 'AI-driven', content: 'Integrating AI tools into design and development workflows — from prototyping with LLMs to building AI-powered product features.' },
-  { title: 'Accessibility-first', content: 'WCAG-compliant design and development. Building products that work for everyone, regardless of ability or device.' },
-  { title: 'Graphic & Branding', content: 'Visual identity, typography, and brand systems that communicate clearly and leave a lasting impression.' },
+  { 
+    title: 'Design Systems', 
+    content: 'Architecting scalable, token-based libraries and comprehensive documentation that bridge the gap between Figma and code, ensuring cross-team consistency.' 
+  },
+  { 
+    title: 'UI/UX Design', 
+    content: 'Full-cycle product design focused on visual interaction and high-fidelity prototyping. Transforming complex user flows into intuitive, polished interfaces.' 
+  },
+  { 
+    title: 'UX Research', 
+    content: 'Driving data-informed decisions through user testing and behavioral analytics. Leveraging tools like Hotjar and Dovetail to turn insights into actionable design.' 
+  },
+  { 
+    title: 'Front-end Engineering', 
+    content: 'Bridging the gap between pure design and production code. Engineering pixel-perfect, responsive interfaces using HTML, CSS, and React, while maintaining high standards for performance and code quality.' 
+  },
+  { 
+    title: 'AI & Emerging Tech', 
+    content: 'Optimizing workflows with AI-driven development and Vibe Coding. Integrating LLMs into the creative process to accelerate prototyping and feature delivery.' 
+  },
+  { 
+    title: 'Accessibility & QA', 
+    content: 'An accessibility-first approach rooted in WCAG standards. Committed to building inclusive, a11y-compliant products through rigorous visual and technical QA.' 
+  },
+  { 
+    title: 'Brand Identity', 
+    content: 'Crafting cohesive visual systems and brand languages that resonate across platforms, ensuring every touchpoint communicates a clear, lasting narrative.' 
+  },
 ]
 
 // Typewriter variants for the heading

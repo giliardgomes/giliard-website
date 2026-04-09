@@ -56,6 +56,11 @@
   justify-content: flex-end;
   padding-bottom: var(--spacing-4xl);
   z-index: 4;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 
   &::before {
     content: '';

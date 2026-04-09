@@ -126,6 +126,7 @@
 
 .viewAll {
   margin: var(--spacing-2xl) auto 0;
+  justify-content: center;
 }
 
 /* Mobile */
