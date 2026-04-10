@@ -101,7 +101,7 @@ export default function Footer() {
 
         </div>
         <div className={styles.bottom}>
-          <Logo height={32} width="auto" href='#top' onClick={scrollToTop} />
+          <Logo height={32} width={51.89} href='#top' onClick={scrollToTop} />
           
           <div className={styles.copyright}>
             <span>Designed and Coded by Giliard Gomes © {currentYear}</span>

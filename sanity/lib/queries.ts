@@ -8,7 +8,11 @@ export const CASE_STUDIES_QUERY = defineQuery(`
     client,
     summary,
     tags,
-    coverImage,
+    coverImage {
+      asset-> {
+        url
+      }
+    },
     featured,
     publishedAt
   }

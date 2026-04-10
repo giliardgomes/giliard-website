@@ -16,11 +16,13 @@ function urlFor(source: any) {
   return builder.image(source)
 }
 
+// Full Skeleton Component
 const Skeleton = () => (
   <div className={styles.skeletonWrapper}>
     <div className={styles.skeletonTitle} />
     <div className={styles.skeletonSubtitle} />
     <div className={styles.skeletonHero} />
+    <div className={styles.skeletonText} />
     <div className={styles.skeletonText} />
     <div className={styles.skeletonText} />
   </div>
@@ -74,15 +76,19 @@ export default function CaseStudyPage({ params }: Props) {
   const isDesktop = useIsDesktop()
 
   useEffect(() => {
+    let isMounted = true
     client.fetch(CASE_STUDY_BY_SLUG_QUERY, { slug }).then((data) => {
-      setCaseStudy(data || null)
+      if (isMounted) {
+        setCaseStudy(data || null)
+      }
     })
+    return () => { isMounted = false }
   }, [slug])
 
   // 1. Loading State
   if (caseStudy === undefined) {
     return (
-      <Main>
+      <Main className={styles.mainPost}>
         <div className={styles.post}>
           <Skeleton />
         </div>
@@ -93,8 +99,10 @@ export default function CaseStudyPage({ params }: Props) {
   // 2. Not Found State
   if (caseStudy === null) {
     return (
-      <Main>
-        <p>Case study not found.</p>
+      <Main className={styles.mainPost}>
+        <section className={styles.post}>
+          <p>Case study not found.</p>
+        </section>
       </Main>
     )
   }

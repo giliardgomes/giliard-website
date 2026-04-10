@@ -7,14 +7,14 @@ import styles from './StackHome.module.css'
 const allTags = [
   // Design & UI
   'Design System', 'Design Tokens', 'Figma', 'Sketch', 'Illustrator', 'UI Design', 'UX Design',
-  'Branding', 'Visual Interaction', 'Motion', 'Lottie', 'Prototyping', 'High-fidelity UI', 'Microinteractions', 'Iconography', 'Typography', 'Color Theory',
+  'Branding', 'Visual Interaction', 'Motion', 'Lottie', 'Prototyping', 'High-fidelity UI', 'Microinteractions', 'Iconography', 'Typography',
 
   // Development & Styling
   'React', 'Next.js', 'TypeScript', 'JavaScript', 'HTML', 'CSS', 'Sass', 'Less', 'Styled Components', 
   'Tailwind CSS', 'Mantine', 'CSS Variables', 'Vite', 'Storybook', 'jQuery', 'Material-UI', 'VS Code',
 
   // Research & Analytics
-  'UX Research', 'User Testing', 'Dovetail', 'Pendo', 'Hotjar', 
+  'UX Research', 'User Testing', 'User Surveys', 'Dovetail', 'Pendo', 'Hotjar', 
   'FullStory', 'Google Analytics',
 
   // Infrastructure & CMS
@@ -37,7 +37,12 @@ const shuffleArray = (array: string[]) => {
 function MarqueeRow({ tags, reverse = false }: { tags: string[], reverse?: boolean }) {
   const trackRef = useRef<HTMLDivElement>(null)
   const animationRef = useRef<Animation | null>(null)
+  const [isDragging, setIsDragging] = useState(false)
+  const isHovered = useRef(false)
+  const lastX = useRef(0)
+
   const doubled = [...tags, ...tags]
+  const DURATION = 200000
 
   useEffect(() => {
     if (!trackRef.current) return
@@ -47,7 +52,7 @@ function MarqueeRow({ tags, reverse = false }: { tags: string[], reverse?: boole
       : [{ transform: 'translateX(0)' }, { transform: 'translateX(-50%)' }]
 
     animationRef.current = trackRef.current.animate(keyframes, {
-      duration: 200000,
+      duration: DURATION,
       iterations: Infinity,
       easing: 'linear',
     })
@@ -55,12 +60,50 @@ function MarqueeRow({ tags, reverse = false }: { tags: string[], reverse?: boole
     return () => animationRef.current?.cancel()
   }, [reverse])
 
+  const handlePointerDown = (e: React.PointerEvent) => {
+    setIsDragging(true)
+    lastX.current = e.pageX
+    if (animationRef.current) animationRef.current.pause()
+    trackRef.current?.setPointerCapture(e.pointerId)
+  }
+
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (!isDragging || !animationRef.current || !trackRef.current) return
+
+    const deltaX = e.pageX - lastX.current
+    lastX.current = e.pageX
+
+    const trackWidth = trackRef.current.scrollWidth / 2
+    const timeDelta = (deltaX / trackWidth) * DURATION
+    const currentPos = animationRef.current.currentTime as number
+    
+    animationRef.current.currentTime = reverse 
+      ? currentPos + timeDelta 
+      : currentPos - timeDelta
+  }
+
+  const handlePointerUp = (e: React.PointerEvent) => {
+    setIsDragging(false)
+    trackRef.current?.releasePointerCapture(e.pointerId)
+    
+    if (animationRef.current) {
+      animationRef.current.play()
+      animationRef.current.playbackRate = isHovered.current ? 0.1 : 1
+    }
+  }
+
   const handleMouseEnter = () => {
-    if (animationRef.current) animationRef.current.playbackRate = 0.1
+    isHovered.current = true
+    if (animationRef.current && !isDragging) {
+      animationRef.current.playbackRate = 0.1
+    }
   }
 
   const handleMouseLeave = () => {
-    if (animationRef.current) animationRef.current.playbackRate = 1
+    isHovered.current = false
+    if (animationRef.current && !isDragging) {
+      animationRef.current.playbackRate = 1
+    }
   }
 
   return (
@@ -70,9 +113,22 @@ function MarqueeRow({ tags, reverse = false }: { tags: string[], reverse?: boole
         className={styles.marqueeTrack}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerUp}
+        data-dragging={isDragging}
+        style={{ 
+          touchAction: 'none',
+          userSelect: 'none',
+          display: 'flex',
+          width: 'max-content'
+        }}
       >
         {doubled.map((tag, i) => (
-          <span key={i} className={styles.tag}>{tag}</span>
+          <span key={i} className={styles.tag}>
+            {tag}
+          </span>
         ))}
       </div>
     </div>

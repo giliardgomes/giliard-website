@@ -6,7 +6,7 @@ export default function Header() {
   return (
     <header id='top' className={styles.header}>
       <div className={styles.inner}>
-        <Logo />
+        <Logo height={64} width={103.78} />
         <Nav />
       </div>
     </header>

@@ -1,6 +1,6 @@
 .post {
     max-width: 1600px;
-    margin: 0 auto 10rem;
+    margin: 0 auto 5rem;
     padding: 0 var(--spacing-2xl);
     display: flex;
     gap: var(--spacing-3xl);
@@ -154,7 +154,7 @@
 
 .browsePosts {
     max-width: 1600px;
-    margin: 0 auto;
+    margin: 0 auto var(--spacing-xl);
     padding: var(--spacing-3xl);
     display: flex;
     justify-content: space-between;
@@ -251,38 +251,58 @@
   100% { opacity: 0.6; }
 }
 
+/* Skeleton Styles */
 .skeletonWrapper {
-  animation: pulse 1.5s infinite ease-in-out;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.skeletonTitle, 
+.skeletonSubtitle, 
+.skeletonHero, 
+.skeletonText {
+  background: #eee; /* Light mode color */
+  background: linear-gradient(110deg, var(--color-bg-secondary) 8%, var(--color-bg) 18%, var(--color-bg-secondary) 33%);
+  background-size: 200% 100%;
+  animation: shine 1.5s linear infinite;
+  border-radius: 4px;
+}
+
+:global([data-theme='dark']) .skeletonTitle,
+:global([data-theme='dark']) .skeletonSubtitle,
+:global([data-theme='dark']) .skeletonHero,
+:global([data-theme='dark']) .skeletonText {
+  background: #222; /* Dark mode fallback */
 }
 
 .skeletonTitle {
   width: 60%;
-  height: 48px;
-  background: var(--color-border, #eee);
-  border-radius: 4px;
+  height: 4rem;
 }
 
 .skeletonSubtitle {
   width: 40%;
-  height: 24px;
-  background: var(--color-border, #eee);
-  border-radius: 4px;
-  margin-bottom: 20px;
+  height: 1.5rem;
 }
 
 .skeletonHero {
   width: 100%;
   aspect-ratio: 16 / 9;
-  background: var(--color-border, #eee);
-  border-radius: 8px;
+  margin: 2rem 0;
 }
 
 .skeletonText {
   width: 100%;
-  height: 18px;
-  background: var(--color-border, #eee);
-  border-radius: 4px;
+  height: 1rem;
+}
+
+@keyframes shine {
+  to {
+    background-position-x: -200%;
+  }
 }

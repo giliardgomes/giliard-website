@@ -25,11 +25,27 @@
   display: flex;
   gap: var(--spacing-md);
   width: max-content;
+  color: var(--color-text);
+  
+  /* DEFAULT / LIGHT MODE CURSOR (Black circle) */
+  /* We use %23 instead of # for hex codes in data URIs */
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><circle cx='16' cy='16' r='16' fill='%23000000'/></svg>") 16 16, auto;
 
   @media(max-width: 768px) {
     gap: var(--spacing-sm);
   }
 }
+
+/* DARK MODE CURSOR (White circle) */
+/* This assumes your project uses [data-theme='dark'] or (prefers-color-scheme: dark) */
+/* Update the selector below to match how you handle dark mode */
+:global([data-theme='dark']) .marqueeTrack {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><circle cx='16' cy='16' r='16' fill='%23ffffff'/></svg>") 16 16, auto;
+}
+
+/* .marqueeTrack[data-dragging="true"] {
+  cursor: grabbing !important;
+} */
 
 .tag {
   display: inline-flex;
@@ -44,19 +60,21 @@
   color: var(--color-text);
   white-space: nowrap;
   flex-shrink: 0;
+  pointer-events: none;
 
   @media(max-width: 1024px) {
     font-size: 3rem;
   }
 
   @media(max-width: 768px) {
-    font-size: 2rem;
-    padding: var(--spacing-sm) var(--spacing-xl);
+    font-size: 1.5rem;
+    padding: var(--spacing-sm) var(--spacing-lg);
   }
 }
 
 @media (max-width: 768px) {
   .stackHome {
     padding: var(--spacing-xl) 0;
+    cursor: auto;
   }
 }
