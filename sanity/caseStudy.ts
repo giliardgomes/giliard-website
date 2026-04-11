@@ -62,6 +62,23 @@ export default defineType({
       rows: 3,
     }),
     defineField({
+      name: 'body',
+      title: 'Body',
+      type: 'array',
+      of: [
+        { type: 'block' },
+        { type: 'code' },
+        { type: 'htmlBlock' },
+        { type: 'image', options: { hotspot: true } },
+      ],
+    }),
+    defineField({
+    name: 'customHtml',
+    title: 'Custom HTML',
+    type: 'text',
+    description: 'Raw HTML to render on the page',
+  }),
+    defineField({
       name: 'tools',
       title: 'Tools & Software',
       type: 'array',
@@ -82,15 +99,6 @@ export default defineType({
           { title: 'Miro / FigJam', value: 'miro' },
         ],
       },
-    }),
-    defineField({
-      name: 'body',
-      title: 'Body',
-      type: 'array',
-      of: [
-        { type: 'block' },
-        { type: 'image', options: { hotspot: true } },
-      ],
     }),
     defineField({
       name: 'publishedAt',

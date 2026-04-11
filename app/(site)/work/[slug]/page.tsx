@@ -6,7 +6,9 @@ import { CASE_STUDY_BY_SLUG_QUERY } from '@/sanity/lib/queries'
 import { PortableText } from '@portabletext/react'
 import imageUrlBuilder from '@sanity/image-url'
 import Image from 'next/image'
+
 import Main from '@/components/Main/Main'
+import { createPortableTextComponents } from '@/components/PortableTextComponents'
 import MetaData from './MetaData'
 import styles from './CaseStudy.module.css'
 
@@ -28,30 +30,6 @@ const Skeleton = () => (
   </div>
 )
 
-const portableTextComponents = {
-  types: {
-    image: ({ value }: { value: any }) => (
-      <figure className={styles.figure}>
-        <Image
-          src={urlFor(value).width(1200).url()}
-          alt={value.alt || ''}
-          width={1200}
-          height={675}
-          className={styles.bodyImage}
-        />
-        {value.caption && (
-          <figcaption className={styles.caption}>{value.caption}</figcaption>
-        )}
-      </figure>
-    ),
-  },
-  block: {
-    h2: ({ children }: any) => <h2 className={styles.bodyH2}>{children}</h2>,
-    h3: ({ children }: any) => <h3 className={styles.bodyH3}>{children}</h3>,
-    normal: ({ children }: any) => <p className={styles.bodyP}>{children}</p>,
-  },
-}
-
 export const useIsDesktop = (breakpoint = 1024) => {
   const [isDesktop, setIsDesktop] = useState(false)
 
@@ -71,9 +49,10 @@ interface Props {
 
 export default function CaseStudyPage({ params }: Props) {
   const { slug } = use(params)
-  // Use undefined for initial loading state
   const [caseStudy, setCaseStudy] = useState<any>(undefined)
   const isDesktop = useIsDesktop()
+
+  const components = createPortableTextComponents(styles, urlFor)
 
   useEffect(() => {
     let isMounted = true
@@ -123,7 +102,6 @@ export default function CaseStudyPage({ params }: Props) {
           {caseStudy.summary && (
             <p className={styles.subtitle}>{caseStudy.summary}</p>
           )}
-
           {isDesktop && meta.length > 0 && <MetaData meta={meta} />}
         </div>
 
@@ -143,10 +121,7 @@ export default function CaseStudyPage({ params }: Props) {
 
           {caseStudy.body && (
             <div className={styles.postBody}>
-              <PortableText
-                value={caseStudy.body}
-                components={portableTextComponents}
-              />
+              <PortableText value={caseStudy.body} components={components} />
             </div>
           )}
 

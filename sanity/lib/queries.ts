@@ -37,7 +37,8 @@ export const CASE_STUDY_BY_SLUG_QUERY = defineQuery(`
     "next": *[_type == "caseStudy" && _createdAt > ^._createdAt] | order(_createdAt asc)[0] {
       title,
       "slug": slug.current
-    }
+    },
+    customHtml,
   }
 `)
 
@@ -51,5 +52,19 @@ export const FEATURED_CASE_STUDIES_QUERY = defineQuery(`
     tags,
     coverImage,
     publishedAt
+  }
+`)
+
+export const PAGE_BY_SLUG_QUERY = defineQuery(`
+  *[_type == "page" && slug.current == $slug][0] {
+    _id,
+    title,
+    slug,
+    featuredImage {
+      asset-> {
+        url
+      }
+    },
+    body
   }
 `)

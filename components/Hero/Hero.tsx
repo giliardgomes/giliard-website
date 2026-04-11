@@ -32,33 +32,30 @@ const skills = [
 
 const headlineText = 'Product Designer shaping human-centered digital experiences that matter.'
 
+// Moved outside the component — does not depend on any state or props
+const getRandomGreeting = (exclude?: string): string => {
+  if (welcomingPhrases.length === 0) return ''
+  if (welcomingPhrases.length === 1) return welcomingPhrases[0]
+
+  let nextGreeting = ''
+  do {
+    const randomIndex = Math.floor(Math.random() * welcomingPhrases.length)
+    nextGreeting = welcomingPhrases[randomIndex]
+  } while (exclude !== undefined && nextGreeting === exclude)
+
+  return nextGreeting
+}
+
 export default function Hero() {
   const scale = useScrollScale()
-
-  const getRandomGreeting = (exclude?: string) => {
-    if (welcomingPhrases.length === 0) return ''
-    if (welcomingPhrases.length === 1) return welcomingPhrases[0]
-
-    let nextGreeting = ''
-    do {
-      const randomIndex = Math.floor(Math.random() * welcomingPhrases.length)
-      nextGreeting = welcomingPhrases[randomIndex]
-    } while (exclude !== undefined && nextGreeting === exclude)
-
-    return nextGreeting
-  }
 
   const [greeting, setGreeting] = useState('')
   const [displayedText, setDisplayedText] = useState('')
   const [isTyping, setIsTyping] = useState(false)
 
-  const loadRandomGreeting = (exclude?: string) => {
-    const nextGreeting = getRandomGreeting(exclude)
-    setGreeting(nextGreeting)
-  }
-
+  // Inlined to avoid stale closure warning — only runs once on mount
   useEffect(() => {
-    loadRandomGreeting()
+    setGreeting(getRandomGreeting())
   }, [])
 
   useEffect(() => {
@@ -84,32 +81,50 @@ export default function Hero() {
   }, [greeting])
 
   const handleIntroClick = () => {
-    loadRandomGreeting(greeting)
+    setGreeting(getRandomGreeting(greeting))
   }
 
   return (
-    <Section id='home' className={styles.hero} style={{ transform: `scale(${scale})`, transformOrigin: 'center top', }}>
-      <div className={styles.introText}>
-        <p className={styles.intro} onClick={handleIntroClick} role='button' tabIndex={0}>
-          {displayedText}{isTyping && <span className={styles.cursor}>|</span>}
-        </p>
-        <h1 className={styles.headline}>
-          {headlineText}
-        </h1>
-      </div>
-      <div className={styles.divider}></div>
-      <div className={styles.tagline}>
-        {skills.map((skill) => (
+    <Section id='home' className={styles.hero}>
+      <div
+        id='hero-content'
+        className={styles.heroContent}
+        style={{
+          transform: `scale(${scale})`,
+          transformOrigin: 'top center',
+          top: 0,
+        }}
+        >
+        <div className={styles.introText}>
+          <p
+            className={styles.intro}
+            onClick={handleIntroClick}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') handleIntroClick()
+            }}
+            role='button'
+            tabIndex={0}
+          >
+            {displayedText}{isTyping && <span className={styles.cursor}>|</span>}
+          </p>
+          <h1 className={styles.headline}>
+            {headlineText}
+          </h1>
+        </div>
+        <div className={styles.divider}></div>
+        <div className={styles.tagline}>
+          {skills.map((skill) => (
             <span key={skill} className={styles.skill}>
-                {skill}
+              {skill}
             </span>
-        ))}
+          ))}
+        </div>
+        <CallToActions
+          className={styles.ctaEntrance}
+          primary={{ label: 'Explore', scrollTo: 'about' }}
+          secondary={{ label: 'Get in touch', href: '/contact' }}
+        />
       </div>
-      <CallToActions
-        className={styles.ctaEntrance}
-        primary={{ label: 'Explore', scrollTo: 'about' }}
-        secondary={{ label: 'Get in touch', href: '/contact' }}
-      />
     </Section>
   )
 }

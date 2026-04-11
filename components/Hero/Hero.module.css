@@ -8,6 +8,7 @@
   min-height: 100vh;
   scroll-snap-align: start;
   scroll-snap-stop: always;
+  position: sticky;
 
   &::before {
     content: '';
@@ -26,6 +27,14 @@
     padding-top: 10rem;
     position: relative!important;
   }
+}
+
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  transform-origin: top center;
+  position: relative;
 }
 
 html[data-theme="light"] {
