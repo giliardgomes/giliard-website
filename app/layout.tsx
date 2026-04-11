@@ -3,6 +3,9 @@ import "./globals.css"
 import { Young_Serif, Inter_Tight } from 'next/font/google';
 import PageWrapper from "@/components/PageWrapper/PageWrapper"
 
+import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
+
 const youngSerif = Young_Serif({
   weight: '400',
   subsets: ['latin'],
@@ -44,6 +47,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <PageWrapper>{children}</PageWrapper>
       </body>
+      <SpeedInsights />
+      <Analytics />
     </html>
   );
 }
