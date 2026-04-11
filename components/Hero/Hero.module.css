@@ -205,6 +205,8 @@ html[data-theme="light"] {
 @media (max-width: 768px) {
   .hero {
     padding: var(--spacing-lg);
+    position: relative!important;
+    padding-bottom: var(--spacing-3xl);
   }
 
   .tagline {

@@ -119,6 +119,10 @@
     }
 }
 
+.emailLink {
+    width: 138.7px;
+}
+
 .copyright {
     color: var(--color-text-muted);
     font-size: var(--font-size-xs);
