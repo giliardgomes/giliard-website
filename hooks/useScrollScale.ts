@@ -13,7 +13,6 @@ export function useScrollScale() {
       const heroBounds = heroSection.getBoundingClientRect()
       const heroHeight = heroSection.offsetHeight
 
-      // Stop scaling once Hero is fully out of view
       if (heroBounds.bottom <= 0) {
         setScale(1)
         return

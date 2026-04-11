@@ -1,19 +1,19 @@
-import type { Metadata } from "next";
-import "./globals.css";
-
-import { Young_Serif, Inter_Tight } from 'next/font/google'
+import type { Metadata } from "next"
+import "./globals.css"
+import { Young_Serif, Inter_Tight } from 'next/font/google';
+import PageWrapper from "@/components/PageWrapper/PageWrapper"
 
 const youngSerif = Young_Serif({
   weight: '400',
   subsets: ['latin'],
   variable: '--font-serif',
-})
+});
 
 const interTight = Inter_Tight({
   weight: ['300', '400', '500', '600', '700'],
   subsets: ['latin'],
   variable: '--font-sans',
-})
+});
 
 export const metadata: Metadata = {
   title: "Giliard Gomes | Product Designer",
@@ -42,8 +42,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             `,
           }}
         />
-        {children}
+        <PageWrapper>{children}</PageWrapper>
       </body>
     </html>
-  )
+  );
 }

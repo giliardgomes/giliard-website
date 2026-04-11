@@ -127,12 +127,26 @@ html[data-theme="light"] {
   overflow: hidden;
   z-index: 2;
   box-shadow: 0 4px 16px 4px rgba(0, 0, 0, 0.04);
-  transition: box-shadow 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+
+  img {
+    transition: all 0.3s ease-in-out;
+  }
 }
 
 .postRow:hover {
   .postImage {
     box-shadow: 0px 8px 32px 0px rgba(0, 0, 0, 0.2);
+  }
+
+  .postTitle {
+    color: var(--color-accent);
+  }
+
+  .postImage {
+    img {
+      transform: scale(1.05);
+    }
   }
 }
 
