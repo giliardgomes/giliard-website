@@ -70,7 +70,7 @@
     white-space: nowrap;
 
     svg {
-        height: var(--spacing-lg);
+        height: var(--spacing-md);
         width: auto;
 
         path {

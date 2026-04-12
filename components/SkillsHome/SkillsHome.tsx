@@ -8,31 +8,31 @@ import styles from './SkillsHome.module.css'
 const skills = [
   { 
     title: 'Design Systems', 
-    content: 'Architecting scalable, token-based libraries and comprehensive documentation that bridge the gap between Figma and code, ensuring cross-team consistency.' 
+    content: 'I build end-to-end Design Systems, from advanced Figma libraries to production-ready code. I standardize UI components using React and TypeScript, syncing Figma with Storybook and GitHub to provide teams with documented, accessible, and scalable shared components for the entire organization.',
   },
   { 
     title: 'UI/UX Design', 
-    content: 'Full-cycle product design focused on visual interaction and high-fidelity prototyping. Transforming complex user flows into intuitive, polished interfaces.' 
+    content: 'I handle full-cycle product design, creating high-fidelity prototypes based on design system standards. I turn complex flows into simple, polished interfaces that are accessible, responsive, and aligned with the brand..' 
   },
   { 
     title: 'UX Research', 
-    content: 'Driving data-informed decisions through user testing and behavioral analytics. Leveraging tools like Hotjar and Dovetail to turn insights into actionable design.' 
+    content: 'I drive design decisions by combining user interviews, prototype testing, and behavioral analytics. I turn quantitative and qualitative data into clear insights that directly improve the user experience, using tools like Dovetail, Google Analytics, FullStory, Hotjar, Datadog, and more.' 
   },
   { 
-    title: 'Front-end Engineering', 
-    content: 'Bridging the gap between pure design and production code. Engineering pixel-perfect, responsive interfaces using HTML, CSS, and React, while maintaining high standards for performance and code quality.' 
+    title: 'Front-end Coding', 
+    content: 'I turn designs into production code by building interfaces with high visual accuracy. I focus on high-quality code and performance using React, Styled Components, Mantine, HTML, CSS, JavaScript/jQuery, Tailwind, and more.' 
   },
   { 
-    title: 'AI & Emerging Tech', 
-    content: 'Optimizing workflows with AI-driven development and Vibe Coding. Integrating LLMs into the creative process to accelerate prototyping and feature delivery.' 
+    title: 'AI workflow', 
+    content: 'I improve my daily work by using AI and "Vibe Coding" to build things faster. I integrate these tools into my creative process to speed up prototyping and deliver features quickly, using Claude, Claude Code, Gemini, and Figma AI.' 
   },
   { 
-    title: 'Accessibility & QA', 
-    content: 'An accessibility-first approach rooted in WCAG standards. Committed to building inclusive, a11y-compliant products through rigorous visual and technical QA.' 
+    title: 'Accessibility-first', 
+    content: 'I take an accessibility-first approach by following WCAG standards to ensure products work for everyone. I build inclusive, compliant interfaces by integrating proper contrast, keyboard navigation for users with visual and other disabilities directly into my process.' 
   },
   { 
     title: 'Brand Identity', 
-    content: 'Crafting cohesive visual systems and brand languages that resonate across platforms, ensuring every touchpoint communicates a clear, lasting narrative.' 
+    content: 'I create brand identities and visual systems that work across different platforms. I focus on keeping the look and feel consistent so the brand is easy to recognize and always tells a story.' 
   },
 ]
 

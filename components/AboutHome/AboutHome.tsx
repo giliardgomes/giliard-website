@@ -7,6 +7,7 @@ import Section from '../Section/Section'
 import CapitalTag from '../CapitalTag/CapitalTag'
 import CallToActions from '../CallToActions/CallToActions'
 import styles from './AboutHome.module.css'
+import aboutImg from "@/public/images/about.png";
 
 const logos = [
   { src: '/images/logos/uber.svg', alt: 'Uber', width: 46 },
@@ -107,10 +108,10 @@ export default function AboutHome() {
           <div className={styles.content}>
             <div className={styles.text}>
               <motion.p variants={textVariants}>
-                Working for over a decade shaping digital products — 8+ years focused on user experience, design systems, and front-end craft.
+                With over a decade of experience shaping digital products, with <strong>8+ years</strong> dedicated to UI/UX, design systems, and front-end development.
               </motion.p>
               <motion.p variants={textVariants}>
-                Currently working at Quorum, an American tech company, leading provider of Government and Public Affairs software.
+                Currently at <strong>Quorum</strong>, building industry-leading software for Government and Public Affairs.
               </motion.p>
               <motion.div variants={textVariants}>
                 <CallToActions link={{ label: 'Read more', href: '/about' }} />
@@ -158,10 +159,11 @@ export default function AboutHome() {
                 style={{ position: 'relative', width: '100%', height: '100%', zIndex: 1, touchAction: 'none' }}
               >
                 <Image
-                  src="https://giliard.com.br/wp-content/themes/shaped/img/hero.png"
+                  src={aboutImg}
                   alt="Giliard Gomes"
                   fill
                   priority
+                  placeholder="blur"
                   style={{ objectFit: 'cover', pointerEvents: 'none' }}
                 />
               </motion.div>
@@ -169,10 +171,8 @@ export default function AboutHome() {
           </div>
         </div>
 
-        <motion.div className={styles.divider} variants={textVariants} />
-
         <motion.div className={styles.trusted} variants={textVariants}>
-          <CapitalTag dataSize="xs" content="Trusted by teams at" />
+          <CapitalTag dataSize="xs" content="Work trusted by teams at" />
           <div className={styles.logos} ref={logosRef}>
             <div className={styles.logosTrack} data-animate={animateLogs}>
               {(isMobile ? [...logos, ...logos] : logos).map((logo, i) => (
@@ -188,6 +188,9 @@ export default function AboutHome() {
             </div>
           </div>
         </motion.div>
+
+        <motion.div className={styles.divider} variants={textVariants} />
+
       </motion.div>
     </Section>
   )

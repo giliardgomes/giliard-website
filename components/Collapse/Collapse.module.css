@@ -106,6 +106,7 @@
   color: var(--color-text);
   z-index: 1;
   position: relative;
+  letter-spacing: 0.2px;
 }
 
 @media(max-width: 768px) {

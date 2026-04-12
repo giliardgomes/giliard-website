@@ -27,10 +27,10 @@ const welcomingPhrases = [
 ]
 
 const skills = [
-  'I design accessible, delightful interfaces focused on UX, building design systems that scale, developing front-end code, and keeping AI as a close ally throughout.',
+  'From accessible, delightful UX to high-quality front-end code, I craft interfaces that are as functional as they are polished by leveraging AI in my workflows.',
 ]
 
-const headlineText = 'Product Designer shaping human-centered digital experiences that matter.'
+const headlineText = 'Product Designer crafting scalable interfaces through design and code.'
 
 // Moved outside the component — does not depend on any state or props
 const getRandomGreeting = (exclude?: string): string => {

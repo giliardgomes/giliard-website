@@ -6,6 +6,7 @@
   padding-bottom: var(--spacing-4xl);
   display: flex;
   gap: var(--spacing-3xl);
+  min-height: 100vh;
   align-items: flex-start;
 }
 

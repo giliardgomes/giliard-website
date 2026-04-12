@@ -278,29 +278,34 @@
 .skeletonWrapper {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: var(--spacing-xl); /* Using your spacing tokens */
   width: 100%;
-  max-width: 1200px;
+  max-width: var(--max-width); /* Using your layout token */
   margin: 0 auto;
-  padding: 2rem 0;
+  padding: var(--spacing-xl) 0;
 }
 
 .skeletonTitle, 
 .skeletonSubtitle, 
 .skeletonHero, 
 .skeletonText {
-  background: #eee; /* Light mode color */
-  background: linear-gradient(110deg, var(--color-bg-secondary) 8%, var(--color-bg) 18%, var(--color-bg-secondary) 33%);
+  /* Using --color-border as the base and --color-bg as the highlight */
+  background: linear-gradient(
+    110deg, 
+    var(--color-border) 8%, 
+    var(--color-bg) 18%, 
+    var(--color-border) 33%
+  );
   background-size: 200% 100%;
   animation: shine 1.5s linear infinite;
-  border-radius: 4px;
+  border-radius: var(--border-radius-sm); /* Using your radius token */
 }
 
-:global([data-theme='dark']) .skeletonTitle,
-:global([data-theme='dark']) .skeletonSubtitle,
-:global([data-theme='dark']) .skeletonHero,
-:global([data-theme='dark']) .skeletonText {
-  background: #222; /* Dark mode fallback */
+/* Keyframes for the shimmer effect */
+@keyframes shine {
+  to {
+    background-position-x: -200%;
+  }
 }
 
 .skeletonTitle {
@@ -316,7 +321,7 @@
 .skeletonHero {
   width: 100%;
   aspect-ratio: 16 / 9;
-  margin: 2rem 0;
+  margin: var(--spacing-xl) 0;
 }
 
 .skeletonText {

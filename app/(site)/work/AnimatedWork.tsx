@@ -7,15 +7,12 @@ import { motion, AnimatePresence, type Variants } from "framer-motion"
 import styles from "./workPage.module.css"
 
 import Section from "@/components/Section/Section"
-
 import { useEntranceAnimation } from "@/hooks/useEntranceAnimation"
 
 const headingVariants: Variants = {
   hidden: {},
   visible: {
-    transition: {
-      staggerChildren: 0.08,
-    },
+    transition: { staggerChildren: 0.08 },
   },
 };
 
@@ -49,18 +46,13 @@ export default function AnimatedWork({ cases }: Props) {
   const controls = useEntranceAnimation();
   const [activeFilter, setActiveFilter] = useState<string | null>(null)
 
-  // Collect unique tags across all cases
-  const allTags = Array.from(
-    new Set(cases.flatMap((item) => item.tags ?? []))
-  )
-
+  const allTags = Array.from(new Set(cases.flatMap((item) => item.tags ?? [])))
   const filteredCases = activeFilter
     ? cases.filter((item) => item.tags?.includes(activeFilter))
     : cases
 
   return (
     <Section className={styles.layout}>
-
       <motion.div
         className={styles.heading}
         initial="hidden"
@@ -68,36 +60,43 @@ export default function AnimatedWork({ cases }: Props) {
         variants={headingVariants}
       >
         <motion.h1 className={styles.title} variants={itemVariants}>
-          Selected Work
+          <span>Work</span>
         </motion.h1>
 
-        <motion.div className={styles.filters} variants={itemVariants}>
-          <button
-            className={`${styles.filterBtn} ${!activeFilter ? styles.filterBtnActive : ''}`}
-            onClick={() => setActiveFilter(null)}
+        {/* Filters Container */}
+        <div className={styles.filtersContainer}>
+          <motion.div 
+            className={styles.filters} 
+            variants={itemVariants}
+            /* REMOVED: drag properties that were causing the -300px offset */
           >
-            {!activeFilter && (
-              <svg width="13" height="10" viewBox="0 0 13 10" fill="none" aria-hidden="true">
-                <path d="M1 4.5L4.5 8.5L11.5 1" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            )}
-            All cases
-          </button>
-          {allTags.map((tag) => (
             <button
-              key={tag}
-              className={`${styles.filterBtn} ${activeFilter === tag ? styles.filterBtnActive : ''}`}
-              onClick={() => setActiveFilter(tag)}
+              className={`${styles.filterBtn} ${!activeFilter ? styles.filterBtnActive : ''}`}
+              onClick={() => setActiveFilter(null)}
             >
-              {activeFilter === tag && (
-                <svg width="13" height="10" viewBox="0 0 13 10" fill="none" aria-hidden="true">
+              {!activeFilter && (
+                <svg width="13" height="10" viewBox="0 0 13 10" fill="none">
                   <path d="M1 4.5L4.5 8.5L11.5 1" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               )}
-              {tag}
+              All cases
             </button>
-          ))}
-        </motion.div>
+            {allTags.map((tag) => (
+              <button
+                key={tag}
+                className={`${styles.filterBtn} ${activeFilter === tag ? styles.filterBtnActive : ''}`}
+                onClick={() => setActiveFilter(tag)}
+              >
+                {activeFilter === tag && (
+                  <svg width="13" height="10" viewBox="0 0 13 10" fill="none">
+                    <path d="M1 4.5L4.5 8.5L11.5 1" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                )}
+                {tag}
+              </button>
+            ))}
+          </motion.div>
+        </div>
       </motion.div>
 
       <motion.ul
@@ -130,16 +129,13 @@ export default function AnimatedWork({ cases }: Props) {
                 </div>
                 <div className={styles.postText}>
                   <h2 className={styles.postTitle}>{item.title}</h2>
-                  {item.summary && (
-                    <p className={styles.postSummary}>{item.summary}</p>
-                  )}
+                  {item.summary && <p className={styles.postSummary}>{item.summary}</p>}
                 </div>
               </Link>
             </motion.li>
           ))}
         </AnimatePresence>
       </motion.ul>
-
     </Section>
   );
 }
