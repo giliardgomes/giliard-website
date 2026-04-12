@@ -6,11 +6,17 @@ import Main from '@/components/Main/Main'
 import StackHome from '@/components/StackHome/StackHome'
 
 import { client } from '@/sanity/lib/client'
-import { FEATURED_CASE_STUDIES_QUERY } from '@/sanity/lib/queries'
-import Footer from '@/components/Footer/Footer'
+
+const query = `*[_type == "caseStudy"] | order(_createdAt desc) [0...2] {
+  _id,
+  title,
+  alternativeTitle,
+  slug,
+  coverImage
+}`
 
 export default async function Home() {
-  const cases = await client.fetch(FEATURED_CASE_STUDIES_QUERY)
+  const cases = await client.fetch(query)
 
   return (
     <>

@@ -1,9 +1,10 @@
 import { defineQuery } from 'next-sanity'
 
 export const CASE_STUDIES_QUERY = defineQuery(`
-  *[_type == "caseStudy"] | order(publishedAt desc) {
+  *[_type == "caseStudy"] | order(_createdAt desc) {
     _id,
     title,
+    alternativeTitle,
     slug,
     client,
     summary,
@@ -26,7 +27,18 @@ export const CASE_STUDY_BY_SLUG_QUERY = defineQuery(`
     client,
     summary,
     coverImage,
-    body,
+    body[] {
+      ...,
+      _type == "video" => {
+        ...,
+        asset {
+          ...,
+          asset-> {
+            url
+          }
+        }
+      }
+    },
     tools,
     myRole,
     year,
@@ -65,6 +77,17 @@ export const PAGE_BY_SLUG_QUERY = defineQuery(`
         url
       }
     },
-    body
+    body[] {
+      ...,
+      _type == "video" => {
+        ...,
+        asset {
+          ...,
+          asset-> {
+            url
+          }
+        }
+      }
+    }
   }
 `)

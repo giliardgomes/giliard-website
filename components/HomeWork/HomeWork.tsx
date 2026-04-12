@@ -18,6 +18,7 @@ function urlFor(source: any) {
 interface CaseStudy {
   _id: string
   title: string
+  alternativeTitle?: string
   slug: { current: string }
   coverImage: any
 }
@@ -123,7 +124,7 @@ export default function HomeWork({ cases }: Props) {
                   {item.coverImage && (
                     <Image
                       src={urlFor(item.coverImage).width(720).height(405).url()}
-                      alt={item.title}
+                      alt={item.alternativeTitle ?? item.title}
                       fill
                       style={{ objectFit: 'cover' }}
                       sizes="(max-width: 768px) 100vw, 50vw"
@@ -133,7 +134,7 @@ export default function HomeWork({ cases }: Props) {
                 <div className={styles.titlePost}>
                   <span className={styles.counter}>{index + 1}</span>
                   <h2 className={styles.title}>
-                    <span className={styles.titleText}>{item.title}</span>
+                    <span className={styles.titleText}>{item.alternativeTitle ?? item.title}</span>
                   </h2>
                 </div>
               </Link>

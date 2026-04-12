@@ -12,6 +12,11 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'alternativeTitle',
+      title: 'Alternative Title',
+      type: 'string',
+    }),
+    defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
@@ -28,6 +33,7 @@ export default defineType({
       of: [{ type: 'block' },
            { type: 'code' },
            { type: 'htmlBlock' },
+           { type: 'video' }
       ],
     }),
     defineField({

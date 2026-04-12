@@ -26,7 +26,7 @@ export default async function Page({ params }: Props) {
   const components = createPortableTextComponents(styles)
 
   return (
-    <Main className={styles.page}>
+    <Main className={`${styles.page}${!page.featuredImage?.asset?.url ? ` ${styles.pageNoImage}` : ''}`}>
       <div className={styles.content}>
         <div className={styles.heading}>
           <h1>{page.title}</h1>

@@ -36,6 +36,25 @@ export function createPortableTextComponents(
       htmlBlock: ({ value }: { value: { html: string } }) => (
         <div dangerouslySetInnerHTML={{ __html: value.html }} />
       ),
+      video: ({ value }: { value: { asset: { asset: { url: string } } | null; caption?: string } }) => {
+      const url = value.asset?.asset?.url
+      if (!url) return null
+
+      return (
+        <figure className={styles.figure}>
+          <video
+            src={url}
+            controls={false}
+            autoPlay
+            muted
+            className={styles.bodyVideo}
+          />
+          {value.caption && (
+            <figcaption className={styles.caption}>{value.caption}</figcaption>
+          )}
+        </figure>
+      )
+    },
     },
     block: {
       h2: ({ children }: any) => <h2 className={styles.bodyH2}>{children}</h2>,

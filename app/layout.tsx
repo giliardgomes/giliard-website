@@ -20,12 +20,15 @@ const interTight = Inter_Tight({
 
 export const metadata: Metadata = {
   title: "Giliard Gomes | Product Designer",
-  description: "Product Designer creating digital experiences for global impact.",
+  description: "Product Designer from Brazil working globally.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta name="google-site-verification" content="T0aUnv7YVvgpgIXtG5HW061tjxT-E672rYyoud0l7QE"></meta>
+      </head>
       <body
         className={`${youngSerif.variable} ${interTight.variable}`}
         suppressHydrationWarning

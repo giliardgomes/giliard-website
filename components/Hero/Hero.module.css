@@ -206,7 +206,6 @@ html[data-theme="light"] {
   .hero {
     padding: var(--spacing-lg);
     position: relative!important;
-    padding-bottom: var(--spacing-3xl);
   }
 
   .tagline {

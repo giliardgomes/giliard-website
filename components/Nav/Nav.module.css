@@ -56,11 +56,12 @@
   justify-content: flex-end;
   padding-bottom: var(--spacing-4xl);
   z-index: 4;
-  height: 100svh;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  box-shadow: 0 0 0 4rem var(--color-bg);
 
   &::before {
     content: '';

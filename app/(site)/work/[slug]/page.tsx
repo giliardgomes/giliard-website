@@ -88,7 +88,7 @@ export default function CaseStudyPage({ params }: Props) {
 
   // 3. Loaded State
   const meta = [
-    caseStudy.client && { label: 'Client', value: caseStudy.client },
+    caseStudy.client && { label: 'Company', value: caseStudy.client },
     caseStudy.myRole && { label: 'Role', value: caseStudy.myRole },
     caseStudy.year && { label: 'Year', value: caseStudy.year },
     caseStudy.tools?.length && { label: 'Tools', value: caseStudy.tools },
@@ -105,7 +105,7 @@ export default function CaseStudyPage({ params }: Props) {
           {isDesktop && meta.length > 0 && <MetaData meta={meta} />}
         </div>
 
-        <div className={styles.postContent}>
+        <div className={styles.postContent} id="post">
           {caseStudy.coverImage && (
             <div className={styles.featuredImage}>
               <Image
