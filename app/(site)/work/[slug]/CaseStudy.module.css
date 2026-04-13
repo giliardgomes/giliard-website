@@ -156,6 +156,10 @@
             text-decoration-color: var(--color-accent);
         }
     }
+
+    img, video {
+        border: 1px solid var(--color-border);
+    }
 }
 
 .bodyVideo {

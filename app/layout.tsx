@@ -1,7 +1,9 @@
 import type { Metadata } from "next"
-import "./globals.css"
 import { Young_Serif, Inter_Tight } from 'next/font/google';
+
 import PageWrapper from "@/components/PageWrapper/PageWrapper"
+
+import "./globals.css"
 
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
@@ -19,20 +21,49 @@ const interTight = Inter_Tight({
 });
 
 export const metadata: Metadata = {
-  title: "Giliard Gomes | Product Designer",
-  description: "Product Designer from Brazil working globally.",
-};
+  metadataBase: new URL('https://giliard.com.br'),
+  title: {
+    default: 'Giliard Gomes — Product Designer',
+    template: '%s | Giliard Gomes',
+  },
+  description:
+    'Product Designer specializing in UX/UI design, design systems, and accessible interfaces.',
+  alternates: {
+    canonical: 'https://giliard.com.br',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://giliard.com.br',
+    siteName: 'Giliard Gomes',
+    title: 'Giliard Gomes — Product Designer',
+    description:
+      'Product Designer specializing in UX/UI design, design systems, and accessible interfaces.',
+    images: [
+    {
+      url: '/images/about.png',
+      width: 1200,
+      height: 630,
+      alt: 'Giliard Gomes — Product Designer',
+    },
+  ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Giliard Gomes — Product Designer',
+    description:
+      'Product Designer specializing in UX/UI design, design systems, and accessible interfaces.',
+    images: ['/images/about.png'],
+  },
+  verification: {
+    google: 'T0aUnv7YVvgpgIXtG5HW061tjxT-E672rYyoud0l7QE',
+  },
+}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <meta name="google-site-verification" content="T0aUnv7YVvgpgIXtG5HW061tjxT-E672rYyoud0l7QE"></meta>
-      </head>
-      <body
-        className={`${youngSerif.variable} ${interTight.variable}`}
-        suppressHydrationWarning
-      >
         <script
           suppressHydrationWarning
           dangerouslySetInnerHTML={{
@@ -48,10 +79,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             `,
           }}
         />
+      </head>
+      <body
+        className={`${youngSerif.variable} ${interTight.variable}`}
+        suppressHydrationWarning
+      >
         <PageWrapper>{children}</PageWrapper>
+        <SpeedInsights />
+        <Analytics />
       </body>
-      <SpeedInsights />
-      <Analytics />
     </html>
   );
 }
