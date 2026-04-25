@@ -70,6 +70,7 @@ export function createPortableTextComponents(
               src={url}
               controls={false}
               autoPlay
+              loop
               muted
               className={styles.bodyVideo}
               style={{ pointerEvents: 'none' }}

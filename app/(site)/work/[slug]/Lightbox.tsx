@@ -40,7 +40,7 @@ export default function Lightbox({ src, alt, type = 'image', onClose }: Lightbox
           // eslint-disable-next-line @next/next/no-img-element
           <img src={src} alt={alt ?? ''} className={styles.media} />
         ) : (
-          <video src={src} controls autoPlay className={styles.media} />
+          <video src={src} controls autoPlay loop className={styles.media} />
         )}
       </div>
     </div>
