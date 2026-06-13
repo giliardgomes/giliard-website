@@ -127,12 +127,17 @@
         height: auto;
         border-radius: 0.5rem;
     }
-    
-    p, img {
+
+    p,
+    img {
         margin-bottom: var(--spacing-lg);
     }
 
-    h2, h3, h4, h5, h6 {
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
         margin-bottom: var(--spacing-sm);
         color: var(--color-text);
         font-weight: var(--font-weight-regular);
@@ -157,15 +162,16 @@
         }
     }
 
-    img, video {
+    img,
+    video {
         border: 1px solid var(--color-border);
     }
 }
 
 .bodyVideo {
-  width: 100%;
-  border-radius: 0.5rem;
-  margin-bottom: var(--spacing-lg);
+    width: 100%;
+    border-radius: 0.5rem;
+    margin-bottom: var(--spacing-lg);
 }
 
 .toolsList {
@@ -267,74 +273,109 @@
         padding: var(--spacing-lg);
     }
 
-    .nextLink, .prevLink { 
+    .nextLink,
+    .prevLink {
         width: 50%;
     }
 }
 
 @keyframes pulse {
-  0% { opacity: 0.6; }
-  50% { opacity: 1; }
-  100% { opacity: 0.6; }
+    0% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.6;
+    }
 }
 
 /* Skeleton Styles */
 .skeletonWrapper {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xl); /* Using your spacing tokens */
-  width: 100%;
-  max-width: var(--max-width); /* Using your layout token */
-  margin: 0 auto;
-  padding: var(--spacing-xl) 0;
+    display: flex;
+    flex-direction: row;
+    gap: var(--spacing-xxl);
+    /* Using your spacing tokens */
+    width: 100%;
+    max-width: var(--max-width);
+    /* Using your layout token */
+    margin: 0 auto;
+    padding: var(--spacing-xl) 0;
 }
 
-.skeletonTitle, 
-.skeletonSubtitle, 
-.skeletonHero, 
+.skeletonLeft {
+    display: flex;
+    gap: var(--spacing-xl);
+    flex-direction: column;
+    width: 25rem;
+}
+
+.skeletonRight {
+    display: flex;
+    gap: var(--spacing-xl);
+    flex-direction: column;
+    width: 100%;
+}
+
+@media (max-width: 1024px) {
+    .skeletonWrapper {
+        flex-direction: column;
+        gap: var(--spacing-xl);
+    }
+
+    .skeletonLeft {
+        width: 100%;
+    }
+}
+
+.skeletonTitle,
+.skeletonSubtitle,
+.skeletonHero,
 .skeletonText {
-  /* Using --color-border as the base and --color-bg as the highlight */
-  background: linear-gradient(
-    110deg, 
-    var(--color-border) 8%, 
-    var(--color-bg) 18%, 
-    var(--color-border) 33%
-  );
-  background-size: 200% 100%;
-  animation: shine 1.5s linear infinite;
-  border-radius: var(--border-radius-sm); /* Using your radius token */
+    /* Using --color-border as the base and --color-bg as the highlight */
+    background: linear-gradient(110deg,
+            var(--color-border) 8%,
+            var(--color-bg) 18%,
+            var(--color-border) 33%);
+    background-size: 200% 100%;
+    animation: shine 1.5s linear infinite;
+    border-radius: var(--border-radius-sm);
+    /* Using your radius token */
 }
 
 /* Keyframes for the shimmer effect */
 @keyframes shine {
-  to {
-    background-position-x: -200%;
-  }
+    to {
+        background-position-x: -200%;
+    }
 }
 
 .skeletonTitle {
-  width: 60%;
-  height: 4rem;
+    width: 60%;
+    height: 4rem;
 }
 
 .skeletonSubtitle {
-  width: 40%;
-  height: 1.5rem;
+    width: 40%;
+    height: 1.5rem;
 }
 
 .skeletonHero {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  margin: var(--spacing-xl) 0;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin: var(--spacing-xl) 0;
 }
 
 .skeletonText {
-  width: 100%;
-  height: 1rem;
+    width: 100%;
+    height: 1rem;
 }
 
 @keyframes shine {
-  to {
-    background-position-x: -200%;
-  }
+    to {
+        background-position-x: -200%;
+    }
 }

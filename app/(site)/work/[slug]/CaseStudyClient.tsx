@@ -21,12 +21,16 @@ function urlFor(source: any) {
 
 const Skeleton = () => (
   <div className={styles.skeletonWrapper}>
-    <div className={styles.skeletonTitle} />
-    <div className={styles.skeletonSubtitle} />
-    <div className={styles.skeletonHero} />
-    <div className={styles.skeletonText} />
-    <div className={styles.skeletonText} />
-    <div className={styles.skeletonText} />
+    <div className={styles.skeletonLeft}>
+      <div className={styles.skeletonTitle} />
+      <div className={styles.skeletonSubtitle} />
+    </div>
+    <div className={styles.skeletonRight}>
+      <div className={styles.skeletonHero} />
+      <div className={styles.skeletonText} />
+      <div className={styles.skeletonText} />
+      <div className={styles.skeletonText} />
+    </div>
   </div>
 )
 
