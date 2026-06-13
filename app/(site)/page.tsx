@@ -15,6 +15,8 @@ const query = `*[_type == "caseStudy"] | order(_createdAt desc) [0...2] {
   coverImage
 }`
 
+export const revalidate = 60; // Revalidate this page every 60 seconds
+
 export default async function Home() {
   const cases = await client.fetch(query)
 
