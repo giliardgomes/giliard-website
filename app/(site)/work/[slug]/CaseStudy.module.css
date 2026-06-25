@@ -297,11 +297,11 @@
 .skeletonWrapper {
     display: flex;
     flex-direction: row;
-    gap: var(--spacing-xxl);
-    /* Using your spacing tokens */
+    gap: var(--spacing-md);
     width: 100%;
-    max-width: var(--max-width);
-    /* Using your layout token */
+    justify-content: center;
+    align-items: center;
+    max-width: 1600px;
     margin: 0 auto;
     padding: var(--spacing-xl) 0;
 }
@@ -311,7 +311,7 @@
     gap: var(--spacing-xl);
     flex-direction: column;
     width: 100%;
-    max-width: 25rem;
+    max-width: 30rem;
     margin-top: var(--spacing-xl);
 }
 
