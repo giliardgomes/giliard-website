@@ -1,7 +1,7 @@
 import { defineQuery } from 'next-sanity'
 
 export const CASE_STUDIES_QUERY = defineQuery(`
-  *[_type == "caseStudy"] | order(_createdAt desc) {
+  *[_type == "caseStudy"] | order(publishedAt desc) {
     _id,
     title,
     alternativeTitle,
