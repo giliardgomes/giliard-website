@@ -4,7 +4,7 @@ import { useState, useEffect, use, useCallback } from 'react'
 import { client } from '@/sanity/lib/client'
 import { CASE_STUDY_BY_SLUG_QUERY } from '@/sanity/lib/queries'
 import { PortableText } from '@portabletext/react'
-import imageUrlBuilder from '@sanity/image-url'
+import { createImageUrlBuilder } from '@sanity/image-url'
 import Image from 'next/image'
 
 import Main from '@/components/Main/Main'
@@ -13,7 +13,7 @@ import MetaData from './MetaData'
 import Lightbox from './Lightbox'
 import styles from './CaseStudy.module.css'
 
-const builder = imageUrlBuilder(client)
+const builder = createImageUrlBuilder(client)
 
 function urlFor(source: any) {
   return builder.image(source)

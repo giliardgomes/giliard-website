@@ -4,13 +4,13 @@ import { useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion, Variants } from 'framer-motion'
-import imageUrlBuilder from '@sanity/image-url'
+import { createImageUrlBuilder } from '@sanity/image-url'
 import { client } from '@/sanity/lib/client'
 import Section from '../Section/Section'
 import CallToActions from '../CallToActions/CallToActions'
 import styles from './HomeWork.module.css'
 
-const builder = imageUrlBuilder(client)
+const builder = createImageUrlBuilder(client)
 function urlFor(source: any) {
   return builder.image(source)
 }

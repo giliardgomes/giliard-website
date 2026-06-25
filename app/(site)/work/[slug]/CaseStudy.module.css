@@ -297,7 +297,7 @@
 .skeletonWrapper {
     display: flex;
     flex-direction: row;
-    gap: var(--spacing-md);
+    gap: var(--spacing-xxl);
     width: 100%;
     justify-content: center;
     max-width: 1600px;
@@ -376,5 +376,17 @@
 @keyframes shine {
     to {
         background-position-x: -200%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .skeletonWrapper {
+        max-width: 100%;
+        flex-direction: column;
+        padding-top: 0;
+    }
+
+    .skeletonLeft {
+        margin-top: 0;
     }
 }

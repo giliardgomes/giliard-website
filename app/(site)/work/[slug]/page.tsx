@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
-import imageUrlBuilder from '@sanity/image-url'
+import { createImageUrlBuilder } from '@sanity/image-url'
 import { client } from '@/sanity/lib/client'
 import { CASE_STUDY_BY_SLUG_QUERY } from '@/sanity/lib/queries'
 import CaseStudyClient from './CaseStudyClient'
 
-const builder = imageUrlBuilder(client)
+const builder = createImageUrlBuilder(client)
 
 function urlFor(source: any) {
   return builder.image(source)
