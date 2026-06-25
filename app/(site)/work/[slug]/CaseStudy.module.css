@@ -300,7 +300,6 @@
     gap: var(--spacing-md);
     width: 100%;
     justify-content: center;
-    align-items: center;
     max-width: 1600px;
     margin: 0 auto;
     padding: var(--spacing-xl) 0;
@@ -338,18 +337,15 @@
 .skeletonSubtitle,
 .skeletonHero,
 .skeletonText {
-    /* Using --color-border as the base and --color-bg as the highlight */
     background: linear-gradient(110deg,
             var(--color-border) 8%,
             var(--color-bg) 18%,
             var(--color-border) 33%);
     background-size: 200% 100%;
     animation: shine 1.5s linear infinite;
-    border-radius: var(--border-radius-sm);
-    /* Using your radius token */
+    border-radius: var(--border-radius-md);
 }
 
-/* Keyframes for the shimmer effect */
 @keyframes shine {
     to {
         background-position-x: -200%;
@@ -357,12 +353,12 @@
 }
 
 .skeletonTitle {
-    width: 60%;
+    width: 100%;
     height: 4rem;
 }
 
 .skeletonSubtitle {
-    width: 40%;
+    width: 80%;
     height: 1.5rem;
 }
 
