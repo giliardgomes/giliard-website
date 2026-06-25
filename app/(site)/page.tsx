@@ -7,7 +7,7 @@ import StackHome from '@/components/StackHome/StackHome'
 
 import { client } from '@/sanity/lib/client'
 
-const query = `*[_type == "caseStudy"] | order(_createdAt desc) [0...2] {
+const query = `*[_type == "caseStudy"] | order(publishedAt desc) [0...2] {
   _id,
   title,
   alternativeTitle,
