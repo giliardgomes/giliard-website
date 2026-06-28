@@ -13,13 +13,25 @@ type Props = {
   params: Promise<{ slug: string }>
 }
 
+type PageData = {
+  title: string
+  featuredImage?: {
+    asset?: {
+      url?: string | null
+    } | null
+  } | null
+  body?: unknown[] | null
+}
+
 export default async function Page({ params }: Props) {
   const { slug } = await params
 
-  const { data: page } = await sanityFetch({
+  const result = await sanityFetch({
     query: PAGE_BY_SLUG_QUERY,
     params: { slug },
   })
+
+  const page = result.data as PageData | null | undefined
 
   if (!page) notFound()
 
