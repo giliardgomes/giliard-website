@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { Young_Serif, Inter_Tight } from 'next/font/google';
 
 import PageWrapper from "@/components/PageWrapper/PageWrapper"
 
@@ -6,6 +7,18 @@ import "./globals.css"
 
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
+
+const youngSerif = Young_Serif({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-serif',
+});
+
+const interTight = Inter_Tight({
+  weight: ['300', '400', '500', '600', '700'],
+  subsets: ['latin'],
+  variable: '--font-sans',
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://giliard.com.br'),
@@ -67,7 +80,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
       </head>
-      <body suppressHydrationWarning>
+      <body
+        className={`${youngSerif.variable} ${interTight.variable}`}
+        suppressHydrationWarning
+      >
         <PageWrapper>{children}</PageWrapper>
         <SpeedInsights />
         <Analytics />
