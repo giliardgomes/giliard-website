@@ -297,7 +297,7 @@
 .skeletonWrapper {
     display: flex;
     flex-direction: row;
-    gap: var(--spacing-xxl);
+    gap: var(--spacing-2xl);
     width: 100%;
     justify-content: center;
     max-width: 1600px;
