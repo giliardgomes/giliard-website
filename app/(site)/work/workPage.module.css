@@ -125,7 +125,7 @@ html[data-theme="dark"] {
     border-color: rgba(250, 250, 250, .2);
 
     &:hover {
-      background-color: rgba(250, 250, 250, .04);
+      border-color: var(--color-text-muted);
     }
   }
 }
@@ -135,7 +135,7 @@ html[data-theme="light"] {
     border-color: rgba(17, 17, 17, .1);
 
     &:hover {
-      background-color: rgba(0, 0, 0, 0.04);
+      border-color: var(--color-text-muted);
     }
   }
 }

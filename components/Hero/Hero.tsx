@@ -94,7 +94,7 @@ export default function Hero() {
           transformOrigin: 'top center',
           top: 0,
         }}
-        >
+      >
         <div className={styles.introText}>
           <p
             className={styles.intro}
@@ -121,7 +121,7 @@ export default function Hero() {
         </div>
         <CallToActions
           className={styles.ctaEntrance}
-          primary={{ label: 'Explore', scrollTo: 'about' }}
+          primary={{ label: 'Explore', scrollTo: 'homework' }}
           secondary={{ label: 'Get in touch', href: '/contact' }}
         />
       </div>
