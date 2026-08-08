@@ -55,7 +55,6 @@
     z-index: 1;
 
     &::after {
-        content: '';
         position: absolute;
         width: 440px;
         height: calc(100% + 6rem);

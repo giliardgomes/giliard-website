@@ -1,19 +1,16 @@
 import type { Metadata } from "next"
 import { Young_Serif, Inter_Tight } from 'next/font/google';
-
 import PageWrapper from "@/components/PageWrapper/PageWrapper"
-
 import "./globals.css"
-
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import Script from 'next/script'
 
 const youngSerif = Young_Serif({
   weight: '400',
   subsets: ['latin'],
   variable: '--font-serif',
 });
-
 const interTight = Inter_Tight({
   weight: ['300', '400', '500', '600', '700'],
   subsets: ['latin'],
@@ -40,13 +37,13 @@ export const metadata: Metadata = {
     description:
       'Product Designer specializing in UX/UI design, design systems, and accessible interfaces.',
     images: [
-    {
-      url: '/images/about.png',
-      width: 1200,
-      height: 630,
-      alt: 'Giliard Gomes — Product Designer',
-    },
-  ],
+      {
+        url: '/images/about.png',
+        width: 1200,
+        height: 630,
+        alt: 'Giliard Gomes — Product Designer',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
@@ -79,6 +76,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             `,
           }}
         />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-R9F1TESR2K"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-R9F1TESR2K');
+          `}
+        </Script>
       </head>
       <body
         className={`${youngSerif.variable} ${interTight.variable}`}
