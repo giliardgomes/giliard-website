@@ -24,10 +24,10 @@ export default async function Home() {
     <>
       <Main>
         <Hero />
-        <WorkSummary />
         <AboutHome cases={cases} />
         <SkillsHome />
         <StackHome />
+        <WorkSummary />
       </Main>
     </>
   )

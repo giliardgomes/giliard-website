@@ -80,7 +80,7 @@
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   transform: none !important;
-  
+
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -95,7 +95,7 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
-  padding: var(--spacing-sm) var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-xl);
   border-radius: var(--border-radius-full);
   background: var(--color-bg);
   color: var(--color-text);
@@ -103,6 +103,7 @@
   cursor: pointer;
   transition: all var(--transition-fast);
   font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-lg);
 }
 
 .filterBtnActive {
@@ -111,12 +112,11 @@
 }
 
 .filterBtnActive {
-  border-color: var(--color-accent)!important;
+  border-color: var(--color-text) !important;
 
   svg {
-    path {
-      stroke: var(--color-accent);
-    }
+    height: var(--spacing-md);
+    width: var(--spacing-md);
   }
 }
 
@@ -125,17 +125,17 @@ html[data-theme="dark"] {
     border-color: rgba(250, 250, 250, .2);
 
     &:hover {
-      border-color: var(--color-accent);
+      background-color: rgba(250, 250, 250, .04);
     }
   }
 }
 
 html[data-theme="light"] {
   .filterBtn {
-    border-color: rgba(17, 17, 17, .2);
+    border-color: rgba(17, 17, 17, .1);
 
     &:hover {
-      border-color: var(--color-accent);
+      background-color: rgba(0, 0, 0, 0.04);
     }
   }
 }
@@ -239,7 +239,7 @@ html[data-theme="light"] {
     font-size: var(--font-size-3xl);
 
     &::before {
-      width: 100vw!important;
+      width: 100vw !important;
       left: -1.5rem;
     }
   }
@@ -299,7 +299,7 @@ html[data-theme="light"] {
   .postImage {
     min-height: 220px;
   }
-  
+
   .filters {
     flex-wrap: nowrap;
     overflow-x: auto;

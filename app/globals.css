@@ -8,8 +8,13 @@
   --color-white: #fff;
   color-scheme: light dark;
 
-  [data-theme='light'] { color-scheme: light; }
-  [data-theme='dark']  { color-scheme: dark; }
+  [data-theme='light'] {
+    color-scheme: light;
+  }
+
+  [data-theme='dark'] {
+    color-scheme: dark;
+  }
 
   /* Breakpoints */
   --bp-sm: 480px;
@@ -19,16 +24,29 @@
   --bp-2xl: 1440px;
 
   /* Typography */
-  --font-serif: var(--font-serif), 'Young Serif' ,Georgia, serif;
-  --font-sans: var(--font-sans), 'Inter Tight', Arial, sans-serif;
+  --font-serif: var(--font-serif),
+  'Young Serif',
+  Georgia,
+  serif;
+  --font-sans: var(--font-sans),
+  'Inter Tight',
+  Arial,
+  sans-serif;
 
-  --font-size-xs: 0.75rem;    /* 12px */
-  --font-size-sm: 0.875rem;   /* 14px */
-  --font-size-md: 1rem;       /* 16px */
-  --font-size-lg: 1.25rem;    /* 20px */
-  --font-size-xl: 1.5rem;     /* 24px */
-  --font-size-2xl: 2rem;      /* 32px */
-  --font-size-3xl: 3rem;      /* 48px */
+  --font-size-xs: 0.75rem;
+  /* 12px */
+  --font-size-sm: 0.875rem;
+  /* 14px */
+  --font-size-md: 1rem;
+  /* 16px */
+  --font-size-lg: 1.25rem;
+  /* 20px */
+  --font-size-xl: 1.5rem;
+  /* 24px */
+  --font-size-2xl: 2rem;
+  /* 32px */
+  --font-size-3xl: 3rem;
+  /* 48px */
 
   --font-weight-regular: 400;
   --font-weight-medium: 500;
@@ -41,18 +59,27 @@
   --line-height-loose: 1.8;
 
   /* Spacing */
-  --spacing-xs: 0.25rem;   /* 4px */
-  --spacing-sm: 0.5rem;    /* 8px */
-  --spacing-md: 1rem;      /* 16px */
-  --spacing-lg: 1.5rem;    /* 24px */
-  --spacing-xl: 2rem;      /* 32px */
-  --spacing-2xl: 3rem;     /* 48px */
-  --spacing-3xl: 4rem;     /* 64px */
-  --spacing-4xl: 6rem;     /* 96px */
+  --spacing-xs: 0.25rem;
+  /* 4px */
+  --spacing-sm: 0.5rem;
+  /* 8px */
+  --spacing-md: 1rem;
+  /* 16px */
+  --spacing-lg: 1.5rem;
+  /* 24px */
+  --spacing-xl: 2rem;
+  /* 32px */
+  --spacing-2xl: 3rem;
+  /* 48px */
+  --spacing-3xl: 4rem;
+  /* 64px */
+  --spacing-4xl: 6rem;
+  /* 96px */
 
   /* Layout */
   --max-width: 1200px;
-  --header-height: 96px;      /* 64px */
+  --header-height: 96px;
+  /* 64px */
 
   /* Borders */
   --border-radius-sm: 4px;
@@ -84,7 +111,9 @@
    RESET
    ================================ */
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -95,6 +124,9 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-text-muted) transparent;
+  scrollbar-gutter: stable;
 }
 
 body {
@@ -105,7 +137,8 @@ body {
   background-color: var(--color-bg);
 }
 
-img, video {
+img,
+video {
   max-width: 100%;
   display: block;
 }
@@ -122,7 +155,8 @@ button {
   font: inherit;
 }
 
-input, textarea {
+input,
+textarea {
   font: inherit;
 }
 
@@ -142,8 +176,10 @@ input, textarea {
   --color-border: #e5e5e5;
 }
 
-h1, h2, h3 {
-    font-family: var(--font-serif);
+h1,
+h2,
+h3 {
+  font-family: var(--font-serif);
 }
 
 /* ================================
@@ -201,6 +237,7 @@ em {
     opacity: 0;
     transform: translateY(-8px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -212,6 +249,7 @@ em {
     opacity: 0;
     transform: translateY(8px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -219,13 +257,23 @@ em {
 }
 
 @keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 @keyframes marqueeReverse {
-  from { transform: translateX(-50%); }
-  to { transform: translateX(0); }
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
 }
 
 [data-icon='moon'] {

@@ -4,8 +4,6 @@
   position: relative;
   display: flex;
   align-items: center;
-  position: sticky;
-  top: 0px;
   padding-bottom: 10rem;
 }
 
@@ -121,7 +119,7 @@
     &::before {
       right: -1.5rem;
       background-size: 30px 30px;
-    } 
+    }
   }
 }
 
@@ -214,7 +212,12 @@
   }
 
   @keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(calc(-100% - var(--spacing-lg))); }
+    0% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(calc(-100% - var(--spacing-lg)));
+    }
   }
 }

@@ -1,32 +1,32 @@
 .homeWork {
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-    position: relative;
-    z-index: 1;
-    background-color: var(--color-bg);
-    transition: opacity 600ms ease;
-    padding: var(--spacing-2xl);
-    display: flex;
-    align-items: center;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  position: relative;
+  z-index: 1;
+  background-color: var(--color-bg);
+  transition: opacity 600ms ease;
+  padding: var(--spacing-2xl);
+  display: flex;
+  align-items: center;
 
-    &::before {
-        content: '';
-        position: absolute;
-        width: 100%;
-        left: 0px;
-        height: 10rem;
-        background: linear-gradient(to bottom, transparent, var(--color-bg));
-        top: -10rem;
-        opacity: 0;
-        transition: all 0.3s ease-in-out;
-        pointer-events: none;
-    }
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    left: 0px;
+    height: 10rem;
+    /* background: linear-gradient(to bottom, transparent, var(--color-bg)); */
+    top: -10rem;
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+    pointer-events: none;
+  }
 }
 
 .visible {
-    &::before {
-        opacity: 1;
-    }
+  &::before {
+    opacity: 1;
+  }
 }
 
 .wrapper {

@@ -5,29 +5,17 @@ import Section from '../Section/Section'
 import styles from './StackHome.module.css'
 
 const allTags = [
-  // Design & UI
-  'Design System', 'Design Tokens', 'Figma', 'Sketch', 'Illustrator', 'UI Design', 'UX Design',
-  'Branding', 'Visual Interaction', 'Motion', 'Lottie', 'Prototyping', 'High-fidelity UI', 'Microinteractions', 'Iconography', 'Typography',
+  // Design, UI & Research
+  'a11y', 'Accessibility', 'Branding', 'Design System', 'Design Tokens', 'DesignOps', 'Figma',
+  'FullStory', 'Google Analytics', 'High-fidelity UI', 'Hotjar', 'Illustrator', 'Motion Graphics',
+  'Pendo', 'Prototyping', 'Sketch', 'Typography', 'UI Design', 'User Testing', 'UX Design',
+  'UX Research', 'Visual Interaction', 'Visual QA', 'WCAG', 'ZeroHeight',
 
-  // Development & Styling
-  'React', 'Next.js', 'TypeScript', 'JavaScript', 'HTML', 'CSS', 'Sass', 'Less', 'Styled Components', 
-  'Tailwind CSS', 'Mantine', 'CSS Variables', 'Vite', 'Storybook', 'jQuery', 'Material-UI', 'VS Code',
-
-  // Research & Analytics
-  'UX Research', 'User Testing', 'User Surveys', 'Dovetail', 'Pendo', 'Hotjar', 
-  'FullStory', 'Google Analytics',
-
-  // Infrastructure & CMS
-  'Node.js', 'Vercel', 'Sanity', 'WordPress', 'GitHub', 'Git', 'ZeroHeight', 'Terminal',
-
-  // Accessibility & QA
-  'Accessibility', 'WCAG', 'a11y', 'Visual QA', 'DevTools', 'Browser Stack', 
-
-  // Management & Operations
-  'Jira', 'Confluence', 'Airtable', 'DesignOps', 'Agile', 'Scrum', 'Kanban',
-
-  // Emerging Tech
-  'Claude Code', 'Vibe Coding', 'AI',
+  // Development, Operations & Tech
+  'Agile', 'AI', 'Antigravity', 'Browser Stack', 'Claude Code', 'Codex', 'Confluence', 'CSS',
+  'DevTools', 'Git', 'GitHub', 'HTML', 'JavaScript', 'Jira', 'jQuery', 'Kanban', 'Mantine',
+  'Material Design', 'Next.js', 'Node.js', 'React', 'Scrum', 'Storybook', 'Styled Components',
+  'Tailwind CSS', 'Terminal', 'TypeScript', 'VS Code', 'Vibe Coding', 'WordPress',
 ];
 
 const shuffleArray = (array: string[]) => {
@@ -76,16 +64,16 @@ function MarqueeRow({ tags, reverse = false }: { tags: string[], reverse?: boole
     const trackWidth = trackRef.current.scrollWidth / 2
     const timeDelta = (deltaX / trackWidth) * DURATION
     const currentPos = animationRef.current.currentTime as number
-    
-    animationRef.current.currentTime = reverse 
-      ? currentPos + timeDelta 
+
+    animationRef.current.currentTime = reverse
+      ? currentPos + timeDelta
       : currentPos - timeDelta
   }
 
   const handlePointerUp = (e: React.PointerEvent) => {
     setIsDragging(false)
     trackRef.current?.releasePointerCapture(e.pointerId)
-    
+
     if (animationRef.current) {
       animationRef.current.play()
       animationRef.current.playbackRate = isHovered.current ? 0.1 : 1
@@ -118,7 +106,7 @@ function MarqueeRow({ tags, reverse = false }: { tags: string[], reverse?: boole
         onPointerUp={handlePointerUp}
         onPointerCancel={handlePointerUp}
         data-dragging={isDragging}
-        style={{ 
+        style={{
           touchAction: 'none',
           userSelect: 'none',
           display: 'flex',
@@ -140,7 +128,7 @@ export default function StackHome() {
 
   useEffect(() => {
     const shuffled = shuffleArray(allTags)
-    
+
     setRows([
       shuffled,
       [...shuffled.slice(6), ...shuffled.slice(0, 6)],
