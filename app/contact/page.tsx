@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react"
 import { sendContactMessage } from "@/app/actions/contact"
+import { Turnstile } from "@marsidev/react-turnstile"
 import { User, AtSign, MessageSquare, ArrowRight, CheckCircle, TriangleAlert } from "lucide-react"
 import { motion, AnimatePresence, type Variants } from "framer-motion"
 
@@ -37,6 +38,7 @@ const itemVariants: Variants = {
 export default function ContactPage() {
   const ref = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");
+  const [turnstileToken, setTurnstileToken] = useState("");
   const headingRef = useFitText();
   const controls = useEntranceAnimation(); // ← moved inside the component
 
@@ -45,8 +47,10 @@ export default function ContactPage() {
     setStatus("sending");
     try {
       const formData = new FormData(ref.current!);
+      formData.set("turnstileToken", turnstileToken);
       await sendContactMessage(formData);
       setStatus("done");
+      setTurnstileToken("");
       ref.current?.reset();
     } catch {
       setStatus("error");
@@ -91,9 +95,20 @@ export default function ContactPage() {
               <textarea className={styles.textarea} name="message" placeholder="Write your message" required />
             </motion.div>
 
+            <input className={styles.honeypot} name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+
+            <motion.div className={styles.turnstile} variants={itemVariants}>
+              <Turnstile
+                siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? ""}
+                onSuccess={setTurnstileToken}
+                onExpire={() => setTurnstileToken("")}
+                onError={() => setTurnstileToken("")}
+              />
+            </motion.div>
+
             <motion.div className={styles.submitRow} variants={itemVariants}>
               <ArrowRight size={24} className={styles.submitIcon} />
-              <button type="submit" disabled={status === "sending"} className={styles.button}>
+              <button type="submit" disabled={status === "sending" || !turnstileToken} className={styles.button}>
                 {status === "sending" ? "Sending..." : "Send message"}
               </button>
             </motion.div>

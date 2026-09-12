@@ -23,4 +23,15 @@ This repository contains the source code for my personal portfolio website, desi
 * **[Resend](https://resend.com/):** Email API client managing the website's contact form submissions.
 * **Vercel Analytics & Speed Insights:** Built-in tracking for visitor metrics and Core Web Vitals.
 
+## Contact form protection
+
+The contact form uses Cloudflare Turnstile, a honeypot field, and a short per-IP submission cooldown. Create a Turnstile widget in the Cloudflare dashboard and add these environment variables locally and in Vercel:
+
+```env
+NEXT_PUBLIC_TURNSTILE_SITE_KEY=your_site_key
+TURNSTILE_SECRET_KEY=your_secret_key
+```
+
+The widget domain must include the production domain and any local development domain you use, such as `localhost`.
+
 ---

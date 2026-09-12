@@ -1,13 +1,63 @@
 "use server";
 
+import { headers } from "next/headers";
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+const recentSubmissions = new Map<string, number>();
+const submissionCooldown = 60_000;
+
+function escapeHtml(value: string) {
+  return value.replace(/[&<>'"]/g, (character) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    "'": "&#39;",
+    '"': "&quot;",
+  })[character] ?? character);
+}
 
 export async function sendContactMessage(formData: FormData) {
-  const name = formData.get("name") as string;
-  const email = formData.get("email") as string;
-  const message = formData.get("message") as string;
+  const name = String(formData.get("name") ?? "").trim();
+  const email = String(formData.get("email") ?? "").trim();
+  const message = String(formData.get("message") ?? "").trim();
+  const turnstileToken = String(formData.get("turnstileToken") ?? "");
+  const honeypot = String(formData.get("website") ?? "");
+
+  if (honeypot || !name || !email || !message || !turnstileToken) {
+    throw new Error("Invalid contact form submission");
+  }
+
+  const requestHeaders = await headers();
+  const clientKey = requestHeaders.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+  const lastSubmission = recentSubmissions.get(clientKey);
+
+  if (lastSubmission && Date.now() - lastSubmission < submissionCooldown) {
+    throw new Error("Please wait before sending another message");
+  }
+
+  const verification = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({
+      secret: process.env.TURNSTILE_SECRET_KEY ?? "",
+      response: turnstileToken,
+      remoteip: clientKey,
+    }),
+    cache: "no-store",
+  });
+
+  const verificationResult = await verification.json() as { success?: boolean };
+
+  if (!verification.ok || !verificationResult.success) {
+    throw new Error("Turnstile verification failed");
+  }
+
+  recentSubmissions.set(clientKey, Date.now());
+
+  const safeName = escapeHtml(name);
+  const safeEmail = escapeHtml(email);
+  const safeMessage = escapeHtml(message).replace(/\n/g, "<br/>");
 
   await resend.emails.send({
     from: "hello@giliard.com.br",
@@ -57,7 +107,7 @@ export async function sendContactMessage(formData: FormData) {
                               From
                             </p>
                             <p style="margin: 0; font-family: Arial, sans-serif; font-size: 16px; color: #111111; font-weight: 600;">
-                              ${name}
+                              ${safeName}
                             </p>
                           </td>
                         </tr>
@@ -67,7 +117,7 @@ export async function sendContactMessage(formData: FormData) {
                               Reply to
                             </p>
                             <a href="mailto:${email}" style="margin: 0; font-family: Arial, sans-serif; font-size: 16px; color: #111111; text-decoration: none; border-bottom: 1px solid #cccccc;">
-                              ${email}
+                              ${safeEmail}
                             </a>
                           </td>
                         </tr>
@@ -78,7 +128,7 @@ export async function sendContactMessage(formData: FormData) {
                         Message
                       </p>
                       <p style="margin: 0; font-family: Georgia, serif; font-size: 17px; line-height: 1.7; color: #333333;">
-                        ${message.replace(/\n/g, '<br/>')}
+                        ${safeMessage}
                       </p>
 
                     </td>
