@@ -26,6 +26,7 @@ export const CASE_STUDY_BY_SLUG_QUERY = defineQuery(`
     slug,
     client,
     summary,
+    publishedAt,
     coverImage,
     body[] {
       ...,
@@ -42,11 +43,11 @@ export const CASE_STUDY_BY_SLUG_QUERY = defineQuery(`
     tools,
     myRole,
     year,
-    "prev": *[_type == "caseStudy" && _createdAt < ^._createdAt] | order(_createdAt desc)[0] {
+    "prev": *[_type == "caseStudy" && defined(publishedAt) && publishedAt < ^.publishedAt] | order(publishedAt desc)[0] {
       title,
       "slug": slug.current
     },
-    "next": *[_type == "caseStudy" && _createdAt > ^._createdAt] | order(_createdAt asc)[0] {
+    "next": *[_type == "caseStudy" && defined(publishedAt) && publishedAt > ^.publishedAt] | order(publishedAt asc)[0] {
       title,
       "slug": slug.current
     },

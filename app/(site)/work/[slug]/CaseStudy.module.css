@@ -143,6 +143,16 @@
         font-weight: var(--font-weight-regular);
     }
 
+    h2 {
+        font-size: var(--font-size-xl);
+        letter-spacing: -0.2px;
+    }
+
+    h3 {
+        font-size: var(--font-size-lg);
+        letter-spacing: -0.3px;
+    }
+
     ul {
         margin-bottom: var(--spacing-xl);
     }
