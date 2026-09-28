@@ -96,17 +96,6 @@ export default function Hero() {
         }}
       >
         <div className={styles.introText}>
-          <p
-            className={styles.intro}
-            onClick={handleIntroClick}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') handleIntroClick()
-            }}
-            role='button'
-            tabIndex={0}
-          >
-            {displayedText}{isTyping && <span className={styles.cursor}>|</span>}
-          </p>
           <h1 className={styles.headline}>
             {headlineText}
           </h1>

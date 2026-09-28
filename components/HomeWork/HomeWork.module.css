@@ -116,6 +116,8 @@
   background-repeat: no-repeat;
   background-position: 0 100%;
   background-size: 0% 4px;
+  font-weight: 600;
+  letter-spacing: -0.7px;
   transition: background-size 0.6s cubic-bezier(0.25, 1, 0.5, 1), color 0.3s ease;
 }
 

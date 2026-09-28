@@ -24,10 +24,7 @@
   --bp-2xl: 1440px;
 
   /* Typography */
-  --font-serif: var(--font-serif),
-  'Young Serif',
-  Georgia,
-  serif;
+  --font-serif: 'p22-mackinac-pro', Georgia, serif;
   --font-sans: var(--font-sans),
   'Inter Tight',
   Arial,
@@ -180,6 +177,8 @@ h1,
 h2,
 h3 {
   font-family: var(--font-serif);
+  font-weight: 600;
+  letter-spacing: -0.5px;
 }
 
 /* ================================

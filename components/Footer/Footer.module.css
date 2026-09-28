@@ -132,18 +132,22 @@
 
 .copyright {
     color: var(--color-text-muted);
-    font-size: var(--font-size-xs);
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     line-height: 1;
     font-family: monospace;
-    flex-direction: column;
+    flex-direction: row;
     gap: var(--spacing-lg);
 
+    span, a {
+        line-height: 1;
+        font-size: var(--font-size-xs);
+    }
+
     &:hover {
-        span {
+        span:hover {
             &::before {
                 content: '<';
                 margin-right: 2px;
@@ -191,7 +195,7 @@
         display: flex;
         white-space: nowrap;
         line-height: 1;
-        font-size: var(--font-size-sm);
+        font-size: inherit;
         transform: translateY(-7px);
         opacity: 0;
         transition: all 0.3s ease-in-out;

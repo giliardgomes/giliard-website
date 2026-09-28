@@ -200,10 +200,11 @@ html[data-theme="light"] {
 }
 
 .skill {
-  font-family: var(--font-sans);
+  font-family: var(--font-serif);
+  font-weight: 500;
   font-size: var(--font-size-lg);
   line-height: 130%;
-  letter-spacing: -0.4px;
+  letter-spacing: -0.3px;
   color: var(--color-text);
   position: relative;
   display: flex;
