@@ -203,7 +203,7 @@ html[data-theme="light"] {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: var(--spacing-xl);
+  gap: var(--spacing-md);
   padding: var(--spacing-2xl) var(--spacing-3xl);
   z-index: 1;
 }

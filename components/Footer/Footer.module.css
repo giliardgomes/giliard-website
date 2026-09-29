@@ -271,7 +271,6 @@ html[data-theme='light'] {
 
     .socialLink {
         svg {
-            height: var(--spacing-xl);
             width: auto;
         }
     }

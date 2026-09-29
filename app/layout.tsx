@@ -1,13 +1,15 @@
 import type { Metadata } from "next"
-import { Inter_Tight } from 'next/font/google';
+import { Google_Sans } from 'next/font/google';
 import PageWrapper from "@/components/PageWrapper/PageWrapper"
 import "./globals.css"
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import Script from 'next/script'
 
-const interTight = Inter_Tight({
-  weight: ['300', '400', '500', '600', '700'],
+const googleSans = Google_Sans({
+  weight: 'variable',
+  style: ['normal', 'italic'],
+  axes: ['opsz'],
   subsets: ['latin'],
   variable: '--font-sans',
 });
@@ -88,7 +90,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </Script>
       </head>
       <body
-        className={interTight.variable}
+        className={googleSans.variable}
         suppressHydrationWarning
       >
         <PageWrapper>{children}</PageWrapper>

@@ -28,15 +28,7 @@ const itemVariants: Variants = {
   },
 };
 
-const gridVariants: Variants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.4,
-    },
-  },
-};
+const ease = [0.25, 0.1, 0.25, 1] as const;
 
 interface Props {
   cases: any[];
@@ -45,6 +37,12 @@ interface Props {
 export default function AnimatedWork({ cases }: Props) {
   const controls = useEntranceAnimation();
   const [activeFilter, setActiveFilter] = useState<string | null>(null)
+  const [hasFiltered, setHasFiltered] = useState(false)
+
+  const selectFilter = (tag: string | null) => {
+    setHasFiltered(true)
+    setActiveFilter(tag)
+  }
 
   const allTags = Array.from(new Set(cases.flatMap((item) => item.tags ?? [])))
   const filteredCases = activeFilter
@@ -72,26 +70,16 @@ export default function AnimatedWork({ cases }: Props) {
           >
             <button
               className={`${styles.filterBtn} ${!activeFilter ? styles.filterBtnActive : ''}`}
-              onClick={() => setActiveFilter(null)}
+              onClick={() => selectFilter(null)}
             >
-              {!activeFilter && (
-                <svg width="13" height="10" viewBox="0 0 13 10" fill="none">
-                  <path d="M1 4.5L4.5 8.5L11.5 1" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              )}
               All cases
             </button>
             {allTags.map((tag) => (
               <button
                 key={tag}
                 className={`${styles.filterBtn} ${activeFilter === tag ? styles.filterBtnActive : ''}`}
-                onClick={() => setActiveFilter(tag)}
+                onClick={() => selectFilter(tag)}
               >
-                {activeFilter === tag && (
-                  <svg width="13" height="10" viewBox="0 0 13 10" fill="none">
-                    <path d="M1 4.5L4.5 8.5L11.5 1" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                )}
                 {tag}
               </button>
             ))}
@@ -99,21 +87,21 @@ export default function AnimatedWork({ cases }: Props) {
         </div>
       </motion.div>
 
-      <motion.ul
-        className={styles.grid}
-        initial="hidden"
-        animate={controls}
-        variants={gridVariants}
-      >
+      <ul className={styles.grid}>
         <AnimatePresence mode="popLayout">
-          {filteredCases.map((item: any) => (
+          {filteredCases.map((item: any, index: number) => (
             <motion.li
               key={item._id}
-              variants={itemVariants}
               initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                transition: !hasFiltered
+                  ? { duration: 0.5, ease, delay: 0.4 + index * 0.1 }
+                  : { duration: 0.3, ease },
+              }}
               exit={{ opacity: 0, y: 24 }}
-              transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+              transition={{ duration: 0.3, ease }}
               layout
             >
               <Link href={`/work/${item.slug.current}`} className={styles.postRow}>
@@ -135,7 +123,7 @@ export default function AnimatedWork({ cases }: Props) {
             </motion.li>
           ))}
         </AnimatePresence>
-      </motion.ul>
+      </ul>
     </Section>
   );
 }

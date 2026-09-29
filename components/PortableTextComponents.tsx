@@ -72,6 +72,13 @@ export function createPortableTextComponents(
               autoPlay
               loop
               muted
+              playsInline
+              ref={(el) => {
+                if (!el) return
+                // iOS Safari only autoplays when the muted property is set on the element
+                el.muted = true
+                el.play().catch(() => {})
+              }}
               className={styles.bodyVideo}
               style={{ pointerEvents: 'none' }}
             />
