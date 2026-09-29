@@ -199,8 +199,12 @@ html[data-theme="light"] {
   display: flex;
   max-width: 55rem;
 
-  @media(max-width: 375px) {
+  @media(max-width: 460px) {
     font-size: var(--font-size-lg);
+  }
+
+  @media(max-width: 375px) {
+    font-size: 1.125rem;
   }
 }
 
