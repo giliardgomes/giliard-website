@@ -90,6 +90,21 @@ export function createPortableTextComponents(
       },
     },
 
+    marks: {
+      link: ({ value, children }: any) => {
+        const href = value?.href
+        if (!href) return <>{children}</>
+
+        return value.blank ? (
+          <a href={href} target="_blank" rel="noopener noreferrer">
+            {children}
+          </a>
+        ) : (
+          <a href={href}>{children}</a>
+        )
+      },
+    },
+
     block: {
       h2: ({ children }: any) => <h2 className={styles.bodyH2}>{children}</h2>,
       h3: ({ children }: any) => <h3 className={styles.bodyH3}>{children}</h3>,

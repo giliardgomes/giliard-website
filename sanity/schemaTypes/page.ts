@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity'
+import { richTextBlock } from './richTextBlock'
 
 export default defineType({
   name: 'page',
@@ -30,7 +31,7 @@ export default defineType({
       name: 'body',
       title: 'Body',
       type: 'array',
-      of: [{ type: 'block' },
+      of: [richTextBlock,
            { type: 'code' },
            { type: 'htmlBlock' },
            { type: 'video' }
