@@ -38,7 +38,16 @@
     height: 0px;
     background-size: 30px 30px;
     background-image: radial-gradient(circle, var(--color-text) 1px, transparent 1px);
-    left: -3rem;
+    mask-image: radial-gradient(
+      ellipse farthest-side at center,
+      #000 0%,
+      rgb(0 0 0 / .9) 20%,
+      rgb(0 0 0 / .7) 40%,
+      rgb(0 0 0 / .45) 60%,
+      rgb(0 0 0 / .2) 80%,
+      transparent 100%
+    );
+    left: -12rem;
     top: -1.5rem;
     z-index: 1;
     pointer-events: none;
@@ -59,8 +68,8 @@
   to {
     opacity: 1;
     transform: translateX(0);
-    width: 440px;
-    height: 326px;
+    width: 560px;
+    height: 406px;
   }
 }
 
@@ -96,7 +105,8 @@
   gap: var(--spacing-sm);
   padding: var(--spacing-md) var(--spacing-xl);
   border-radius: var(--border-radius-full);
-  background: var(--color-bg);
+  background: color-mix(in srgb, var(--color-bg) 0%, transparent);
+  backdrop-filter: blur(3px);
   color: var(--color-text);
   border: 1px solid var(--color-border);
   cursor: pointer;
@@ -240,6 +250,7 @@ html[data-theme="light"] {
     &::before {
       width: 100vw !important;
       left: -1.5rem;
+      top: -3rem;
     }
   }
 

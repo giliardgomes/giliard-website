@@ -45,6 +45,13 @@
   font-weight: var(--font-weight-regular);
   color: var(--color-text-muted);
   line-height: 1;
+  width: fit-content;
+
+  &:hover {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-style: italic;
+  }
 }
 
 .list {

@@ -17,7 +17,7 @@
 }
 
 .link {
-  font-size: var(--font-size-md);
+  font-size: var(--font-size-lg);
   text-decoration: none;
   color: var(--color-text);
   position: relative;

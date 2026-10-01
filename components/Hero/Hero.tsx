@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import Section from '../Section/Section'
 import CallToActions from '../CallToActions/CallToActions'
@@ -48,6 +48,7 @@ const getRandomGreeting = (exclude?: string): string => {
 
 export default function Hero() {
   const scale = useScrollScale()
+  const heroRef = useRef<HTMLElement>(null)
 
   const [greeting, setGreeting] = useState('')
   const [displayedText, setDisplayedText] = useState('')
@@ -80,12 +81,34 @@ export default function Hero() {
     return () => clearInterval(interval)
   }, [greeting])
 
+  // Track the pointer so the dot pattern can be highlighted around it
+  useEffect(() => {
+    const hero = heroRef.current
+    if (!hero) return
+
+    let frame = 0
+    const handlePointerMove = (e: PointerEvent) => {
+      cancelAnimationFrame(frame)
+      frame = requestAnimationFrame(() => {
+        const rect = hero.getBoundingClientRect()
+        hero.style.setProperty('--spot-x', `${e.clientX - rect.left}px`)
+        hero.style.setProperty('--spot-y', `${e.clientY - rect.top}px`)
+      })
+    }
+
+    hero.addEventListener('pointermove', handlePointerMove)
+    return () => {
+      hero.removeEventListener('pointermove', handlePointerMove)
+      cancelAnimationFrame(frame)
+    }
+  }, [])
+
   const handleIntroClick = () => {
     setGreeting(getRandomGreeting(greeting))
   }
 
   return (
-    <Section id='home' className={styles.hero}>
+    <Section id='home' className={styles.hero} ref={heroRef}>
       <div
         id='hero-content'
         className={styles.heroContent}

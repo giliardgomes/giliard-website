@@ -8,10 +8,21 @@
   border: none;
   background: none;
   border-radius: var(--border-radius-full);
-  transition: opacity var(--transition-fast);
   color: var(--color-text);
   line-height: 1;
   overflow: hidden;
+
+  .icon path, .icon circle {
+    transition: fill 0.25s ease-in-out;
+  }
+
+  &:hover {
+    svg {
+      path, circle {
+        fill: var(--color-accent);
+      }
+    }
+  }
 }
 
 .icon {
@@ -21,12 +32,4 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-
-  &:hover {
-    svg {
-      path, circle {
-        fill: var(--color-accent);
-      }
-    }
-  }
 }

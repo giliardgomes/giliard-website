@@ -1,3 +1,9 @@
+@property --spot-alpha {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+
 .hero {
   display: flex;
   flex-direction: column;
@@ -9,11 +15,32 @@
   scroll-snap-align: start;
   scroll-snap-stop: always;
 
+  --spot-x: 50%;
+  --spot-y: 50%;
+  --dot-base: .3;
+  transition: --spot-alpha 0.4s ease;
+
+  @media (hover: hover) {
+    &:hover {
+      --spot-alpha: 1;
+    }
+  }
+
   &::before {
     content: '';
     background-size: 36px 36px;
     background-image: radial-gradient(circle, var(--color-text) 1px, transparent 1px);
-    opacity: .4;
+    mask-image:
+      radial-gradient(
+        circle 300px at var(--spot-x) var(--spot-y),
+        rgb(0 0 0 / var(--spot-alpha)) 0%,
+        rgb(0 0 0 / calc(var(--spot-alpha) * .9)) 20%,
+        rgb(0 0 0 / calc(var(--spot-alpha) * .7)) 40%,
+        rgb(0 0 0 / calc(var(--spot-alpha) * .45)) 60%,
+        rgb(0 0 0 / calc(var(--spot-alpha) * .2)) 80%,
+        transparent 100%
+      ),
+      linear-gradient(rgb(0 0 0 / var(--dot-base)), rgb(0 0 0 / var(--dot-base)));
     width: 100%;
     height: 100%;
     position: absolute;
@@ -26,6 +53,18 @@
     padding-top: 10rem;
     position: relative !important;
   }
+
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 25rem;
+    left: 0;
+    background: linear-gradient(to bottom, transparent, var(--color-bg));
+    z-index: 0;
+    pointer-events: none;
+  }
 }
 
 .heroContent {
@@ -34,9 +73,14 @@
   gap: var(--spacing-lg);
   transform-origin: top center;
   position: relative;
+  z-index: 1;
 }
 
 html[data-theme="light"] {
+  .hero {
+    --dot-base: .20;
+  }
+
   .hero::before {
     background-image: radial-gradient(circle, var(--color-text) 1px, transparent 1px);
   }
