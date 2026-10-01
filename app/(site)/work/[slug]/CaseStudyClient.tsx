@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, use, useCallback } from 'react'
+import { useState, useEffect, use, useCallback, useMemo } from 'react'
 import { client } from '@/sanity/lib/client'
 import { CASE_STUDY_BY_SLUG_QUERY } from '@/sanity/lib/queries'
 import { PortableText } from '@portabletext/react'
@@ -66,7 +66,10 @@ export default function CaseStudyClient({ params }: Props) {
   const openLightbox = useCallback((item: LightboxItem) => setLightbox(item), [])
   const closeLightbox = useCallback(() => setLightbox(null), [])
 
-  const components = createPortableTextComponents(styles, urlFor, openLightbox)
+  const components = useMemo(
+    () => createPortableTextComponents(styles, urlFor, openLightbox),
+    [openLightbox]
+  )
 
   useEffect(() => {
     let isMounted = true
