@@ -30,6 +30,9 @@ const skills = [
   'From accessible, delightful UX to high-quality front-end code, I craft interfaces that are as functional as they are polished by leveraging AI in my workflows.',
 ]
 
+const MIN_STARS = 10
+const MAX_STARS = 20
+
 const headlineText = 'Product Designer crafting scalable interfaces through design and code.'
 
 // Moved outside the component — does not depend on any state or props
@@ -49,6 +52,7 @@ const getRandomGreeting = (exclude?: string): string => {
 export default function Hero() {
   const scale = useScrollScale()
   const heroRef = useRef<HTMLElement>(null)
+  const starsRef = useRef<HTMLSpanElement[]>([])
 
   const [greeting, setGreeting] = useState('')
   const [displayedText, setDisplayedText] = useState('')
@@ -103,12 +107,58 @@ export default function Hero() {
     }
   }, [])
 
+  // Every second, light up 10-20 random dots of the background grid like twinkling stars
+  useEffect(() => {
+    const hero = heroRef.current
+    const stars = starsRef.current
+    if (!hero || stars.length === 0) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    const GRID = 36 // matches background-size in Hero.module.css
+
+    const twinkle = () => {
+      const cols = Math.floor(hero.clientWidth / GRID)
+      const rows = Math.floor(hero.clientHeight / GRID)
+      const count = MIN_STARS + Math.floor(Math.random() * (MAX_STARS - MIN_STARS + 1))
+
+      // Pick distinct grid cells so two stars never land on the same dot
+      const cells = new Set<number>()
+      while (cells.size < Math.min(count, cols * rows)) {
+        cells.add(Math.floor(Math.random() * cols * rows))
+      }
+
+      Array.from(cells).forEach((cell, i) => {
+        const x = (cell % cols) * GRID + GRID / 2
+        const y = Math.floor(cell / cols) * GRID + GRID / 2
+        const star = stars[i]
+
+        star.style.transform = `translate(${x}px, ${y}px)`
+        star.animate([{ opacity: 0 }, { opacity: 1 }, { opacity: 0 }], {
+          duration: 1000,
+          easing: 'ease-in-out',
+        })
+      })
+    }
+
+    twinkle()
+    const interval = setInterval(twinkle, 1000)
+    return () => clearInterval(interval)
+  }, [])
+
   const handleIntroClick = () => {
     setGreeting(getRandomGreeting(greeting))
   }
 
   return (
     <Section id='home' className={styles.hero} ref={heroRef}>
+      {Array.from({ length: MAX_STARS }, (_, i) => (
+        <span
+          key={i}
+          ref={(el) => { if (el) starsRef.current[i] = el }}
+          className={styles.star}
+          aria-hidden='true'
+        />
+      ))}
       <div
         id='hero-content'
         className={styles.heroContent}
