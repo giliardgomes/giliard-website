@@ -140,10 +140,13 @@
     font-family: monospace;
     flex-direction: row;
     gap: var(--spacing-lg);
+    text-transform: uppercase;
+    position: relative;
 
     span, a {
         line-height: 1;
         font-size: var(--font-size-xs);
+        position: relative;
     }
 
     &:hover {
@@ -151,10 +154,14 @@
             &::before {
                 content: '<';
                 margin-right: 2px;
+                position: absolute;
+                left: calc((var(--spacing-sm) / -1) - 1px);
             }
 
             &::after {
                 content: ' />';
+                right: calc((var(--spacing-md) / -1) - 1px);
+                position: absolute;
             }
         }
     }
