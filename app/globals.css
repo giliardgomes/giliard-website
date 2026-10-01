@@ -166,7 +166,7 @@ textarea {
 }
 
 [data-theme='light'] {
-  --color-bg: #ffffff;
+  --color-bg: #fafafa;
   --color-text: #111111;
   --color-text-muted: #585858;
   --color-accent: tomato;

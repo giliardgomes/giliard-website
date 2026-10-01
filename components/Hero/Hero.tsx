@@ -110,7 +110,7 @@ export default function Hero() {
         </div>
         <CallToActions
           className={styles.ctaEntrance}
-          primary={{ label: 'Explore', scrollTo: 'homework' }}
+          primary={{ label: 'View work', scrollTo: 'homework' }}
           secondary={{ label: 'Get in touch', href: '/contact' }}
         />
       </div>
