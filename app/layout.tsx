@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Google_Sans } from 'next/font/google';
 import PageWrapper from "@/components/PageWrapper/PageWrapper"
+import { SanityLive } from "@/sanity/lib/live"
 import "./globals.css"
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
@@ -94,6 +95,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         suppressHydrationWarning
       >
         <PageWrapper>{children}</PageWrapper>
+        {/* Revalidates sanityFetch caches when published content changes */}
+        <SanityLive />
         <SpeedInsights />
         <Analytics />
       </body>
