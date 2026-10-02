@@ -34,7 +34,7 @@ const stackIcons = [
   { src: illustratorImg, alt: "Illustrator" },
 ]
 
-const funEmojis = ["⚽️", "🎬", "🍕", "📺", "🏈", "🍔", "✈️", "🌿", "🏀", "🎮"]
+const funEmojis = ["⚽️", "🎬", "🍕", "📺", "🏈", "🍔", "✈️", "🌻", "🏀", "🎮", "🍝"]
 
 // Pick a random emoji not currently shown
 function pickEmoji(shown: string[]) {
