@@ -156,14 +156,15 @@
 
   h2, h3, h4 {
     font-size: var(--font-size-lg);
+  }
 
-    span {
-      display: block;
-      font-size: var(--font-size-sm);
-      color: var(--color-text-muted);
-      font-weight: 400;
-      letter-spacing: 0;
-    }
+  /* Subheading, e.g. "by Google" */
+  :is(h1, h2, h3, h4) span {
+    display: block;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    font-weight: 400;
+    letter-spacing: 0;
   }
 
   a {

@@ -4,4 +4,12 @@ import type {StructureResolver} from 'sanity/structure'
 export const structure: StructureResolver = (S) =>
   S.list()
     .title('Content')
-    .items(S.documentTypeListItems())
+    .items([
+      // About page is a singleton: always opens the same document
+      S.listItem()
+        .title('About page')
+        .id('aboutPage')
+        .child(S.document().schemaType('aboutPage').documentId('aboutPage')),
+      S.divider(),
+      ...S.documentTypeListItems().filter((item) => item.getId() !== 'aboutPage'),
+    ])

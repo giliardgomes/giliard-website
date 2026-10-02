@@ -3,7 +3,8 @@ import caseStudy from '../caseStudy'
 import page from '../../sanity/schemaTypes/page'
 import htmlBlock from './htmlBlock'
 import videoBlock from './videoBlock'
+import aboutPage, { aboutTextBlock } from './aboutPage'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [caseStudy, page, htmlBlock, videoBlock],
+  types: [caseStudy, page, htmlBlock, videoBlock, aboutPage, aboutTextBlock],
 }

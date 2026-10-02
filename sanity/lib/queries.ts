@@ -92,3 +92,13 @@ export const PAGE_BY_SLUG_QUERY = defineQuery(`
     }
   }
 `)
+
+export const ABOUT_PAGE_QUERY = defineQuery(`
+  *[_id == "aboutPage"][0] {
+    intro,
+    designStack,
+    publicAffairs,
+    productExpert,
+    justForFun
+  }
+`)
