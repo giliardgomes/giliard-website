@@ -39,7 +39,6 @@ export default function Footer() {
               <li><a href='/work'>Work</a></li>
               <li><a href='/about'>About</a></li>
               <li><a href='/contact'>Contact</a></li>
-              <li><a href='/product-expert'>Product Expert</a></li>
               <li><a href='/privacy-policy'>Privacy Policy</a></li>
             </ul>
           </nav>
@@ -87,7 +86,7 @@ export default function Footer() {
         </div>
         <div className={styles.bottom}>
           <div className={styles.copyright}>
-            <span>Design & Code by Giliard Gomes © {currentYear}</span>
+            <span>Design & Code by<br />Giliard Gomes © {currentYear}</span>
             <a 
               className={styles.backToTop} 
               href='#top' 
