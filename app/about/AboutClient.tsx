@@ -177,7 +177,7 @@ export default function AboutClient({ content }: { content: AboutContent | null 
                 <p style={{ fontSize: "var(--font-size-2xl)", color: "var(--color-text-muted)" }}>🇧🇷  🌴</p>
               </TextBlock>
             </div>
-            <div className={styles.gridCard}>
+            <div className={styles.gridCard} style={{ paddingLeft: "0" }}>
               <TextBlock
                 content={content?.designStack}
                 fallback={{

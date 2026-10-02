@@ -653,6 +653,10 @@ div:has(>.funIcon) {
     &::before {
       left: -1px;
     }
+
+    &:has(h2 span) {
+      padding: var(--spacing-lg) var(--spacing-xl)!important;
+    }
   }
 
   .aboutGrid div.gridCard:nth-child(odd),

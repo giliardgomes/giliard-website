@@ -61,6 +61,7 @@
   white-space: nowrap;
   flex-shrink: 0;
   pointer-events: none;
+  letter-spacing: -0.5px;
 
   @media(max-width: 1024px) {
     font-size: 3rem;

@@ -257,7 +257,7 @@ html[data-theme="light"] {
   max-width: 55rem;
 
   @media(max-width: 460px) {
-    font-size: var(--font-size-lg);
+    font-size: calc(var(--font-size-md) + 2px);
   }
 
   @media(max-width: 375px) {
