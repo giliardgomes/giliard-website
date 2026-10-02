@@ -1,0 +1,148 @@
+.aboutWrapper {
+  margin: 0 auto;
+  padding: 10rem var(--spacing-lg);
+  max-width: 80rem;
+  min-height: 100dvh;
+  flex-direction: column;
+  display: flex;
+  gap: var(--spacing-2xl);
+}
+
+.aboutGrid {
+  display: flex;
+  gap: 0;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  justify-content: center;
+  max-width: 64rem;
+  --grid-fade: 8rem;
+
+  .gridCard {
+    position: relative;
+    min-width: 30rem;
+    width: 100%;
+    max-width: 30rem;
+    flex: 1;
+    padding: var(--spacing-lg) var(--spacing-2xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 15rem;
+    --fade-x: linear-gradient(black, black);
+    --fade-y: linear-gradient(black, black);
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      border: 1px solid color-mix(in srgb, var(--color-text-muted) 20%, white 0%);
+      border-top: 0;
+      border-left: 0;
+      mask-image: var(--fade-x), var(--fade-y);
+      mask-composite: intersect;
+      -webkit-mask-composite: source-in;
+    }
+
+    &:nth-child(odd) {
+      --fade-x: linear-gradient(to right, transparent, black var(--grid-fade));
+    }
+
+    &:nth-child(even) {
+      --fade-x: linear-gradient(to left, transparent, black var(--grid-fade));
+
+      &::before {
+        border-right: 0;
+      }
+    }
+
+    &:nth-child(-n + 2) {
+      --fade-y: linear-gradient(to bottom, transparent, black var(--grid-fade));
+    }
+
+    &:nth-last-child(-n + 2) {
+      --fade-y: linear-gradient(to top, transparent, black var(--grid-fade));
+    }
+
+    &:last-child::before, &:nth-last-child(2)::before {
+      border-bottom: 0;
+    }
+
+    &:nth-child(2) {
+      overflow: hidden;
+
+      &::after {
+        content: '';
+        background-color: var(--color-text);
+        width: 12rem;
+        height: 12rem;
+        border-radius: 100%;
+        bottom: -10rem;
+        left: -10rem;
+        position: absolute;
+        filter: blur(100px);
+        opacity: .5;
+      }
+    }
+  }
+
+  div:has(>.imgAbout) {
+    padding: 0;
+    justify-content: flex-end;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-size: 36px 36px;
+      background-image: radial-gradient(circle, var(--color-text) 1px, transparent 1px);
+      opacity: .9;
+      mask-image: radial-gradient(circle 30rem at bottom right, black 0%, transparent 100%);
+    }
+  }
+
+  div:has(>.stackGrid) {
+    position: relative;
+  }
+}
+
+.imgAbout {
+  position: relative;
+  z-index: 1;
+  width: auto;
+  height: auto;
+  height: 25rem;
+  object-fit: contain;
+  margin: 0 1px 1px 0;
+}
+
+.textBlock {
+  text-align: left;
+  padding: var(--spacing-2xl) 0;
+
+  h1 {
+    font-size: var(--font-size-xl);
+  }
+
+  h1, h2, h3, h4 {
+    font-weight: 500;
+    margin-bottom: var(--spacing-lg);
+    font-family: var(--font-sans);
+  }
+
+  h2, h3, h4 {
+    font-size: var(--font-size-lg);
+  }
+
+  p {
+    font-family: var(--font-serif);
+    letter-spacing: -0.5px;
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--spacing-lg);
+
+    &:last-child {
+      margin: 0;
+    }
+  }
+}
