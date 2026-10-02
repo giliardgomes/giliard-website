@@ -261,6 +261,17 @@
   }
 }
 
+.stackTools {
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+
+  &[data-dragging] {
+    cursor: grabbing;
+    z-index: 2;
+  }
+}
+
 .toolIcon {
   height: 4rem;
   width: auto;
