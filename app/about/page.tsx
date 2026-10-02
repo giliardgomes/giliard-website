@@ -6,6 +6,7 @@ import Footer from "@/components/Footer/Footer"
 import styles from "./aboutPage.module.css"
 
 import Image from 'next/image'
+import { useEffect, useRef, useState } from "react"
 import aboutImg from "@/public/images/giliard-nobg.png";
 import hqImg from "@/public/images/hq.webp";
 import dcImg from "@/public/images/dc.jpeg";
@@ -23,32 +24,89 @@ import peImg from "@/public/images/pe.webp";
 const stackIcons = [
   { src: figmaImg, alt: "Figma" },
   { src: claudeImg, alt: "Claude" },
-  { src: vscodeImg, alt: "Visual Studio Code" },
+  { src: vscodeImg, alt: "VS Code" },
   { src: githubImg, alt: "GitHub" },
   { src: codexImg, alt: "Codex" },
   { src: antigravity, alt: "Antigravity" },
   { src: sketchImg, alt: "Sketch" },
-  { src: photoshopImg, alt: "Adobe Photoshop" },
-  { src: illustratorImg, alt: "Adobe Illustrator" },
+  { src: photoshopImg, alt: "Photoshop" },
+  { src: illustratorImg, alt: "Illustrator" },
 ]
 
+const funEmojis = ["⚽️", "🎬", "🍕", "📺", "🏈", "🍔", "✈️", "🌿", "🏀", "🎮"]
+
+// Pick a random emoji not currently shown
+function pickEmoji(shown: string[]) {
+  const options = funEmojis.filter((emoji) => !shown.includes(emoji))
+  return options[Math.floor(Math.random() * options.length)]
+}
+
+function FunIcons() {
+  const [shown, setShown] = useState(funEmojis.slice(0, 3))
+
+  // Randomize after mount to avoid a hydration mismatch
+  useEffect(() => {
+    setShown((current) => current.reduce<string[]>((picked) => [...picked, pickEmoji(picked)], []))
+  }, [])
+
+  const turn = useRef(0)
+
+  // Only one icon swaps per bounce cycle, taking turns left to right
+  const swap = (index: number) => {
+    if (turn.current !== index) return
+    turn.current = (index + 1) % 3
+    setShown((current) => current.map((emoji, i) => (i === index ? pickEmoji(current) : emoji)))
+  }
+
+  return (
+    <>
+      {shown.map((emoji, index) => (
+        <div className={styles.funIcon} key={index} onAnimationIteration={() => swap(index)}>
+          <p key={emoji}>{emoji}</p>
+        </div>
+      ))}
+    </>
+  )
+}
+
 export default function ContactPage() {
+  const gridRef = useRef<HTMLDivElement>(null)
+
+  // Mark cards as visible once they scroll into view; CSS handles the reveal
+  useEffect(() => {
+    const cards = gridRef.current?.children
+    if (!cards) return
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return
+        (entry.target as HTMLElement).dataset.visible = ""
+        observer.unobserve(entry.target)
+      })
+    }, { threshold: 0.2 })
+
+    Array.from(cards).forEach((card) => observer.observe(card))
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <>
       <Header />
       <Main className={styles.contactPage}>
         <div className={styles.aboutWrapper}>
-          <div className={styles.aboutGrid}>
+          <div className={styles.aboutGrid} ref={gridRef}>
             <div className={styles.gridCard}>
-              <Image
+              <picture className={styles.imgHeading}>
+                <Image
                   src={aboutImg}
                   alt="Giliard Gomes"
                   className={styles.imgAbout}
                 />
-                <div className={styles.flare} />
+              </picture>
+              <div className={styles.flare} />
             </div>
             <div className={styles.gridCard}>
-              <div className={styles.textBlock}>
+              <div className={styles.textBlock} style={{ marginBlock: "auto" }}>
                 <h1>
                   Hi there, I am Giliard Gomes.
                 </h1>
@@ -73,21 +131,28 @@ export default function ContactPage() {
             </div>
             <div className={styles.gridCard}>
               <div className={styles.stackGrid}>
-                {stackIcons.map((icon) => (
-                  <Image src={icon.src} alt={icon.alt} className={styles.toolIcon} key={icon.alt} />
+                {stackIcons.map((icon, index) => (
+                  <div className={styles.stackTools} key={icon.alt} style={{ "--i": index } as React.CSSProperties}>
+                    <Image src={icon.src} alt={icon.alt} className={styles.toolIcon} />
+                    <span>{icon.alt}</span>
+                  </div>
                 ))}
               </div>
             </div>
             <div className={styles.gridCard}>
               <div className={styles.photoCollage}>
-                <Image src={hqImg} alt="Giliard at the Quorum office" className={`${styles.collageImage} ${styles.hqImage}`} />
-                <Image src={dcImg} alt="Giliard in Washington, D.C." className={`${styles.collageImage} ${styles.dcImage}`} />
+                <picture className={`${styles.collageImage} ${styles.dcImage}`}>
+                  <Image src={dcImg} alt="Giliard in Washington, D.C." />
+                </picture>
+                <picture className={`${styles.collageImage} ${styles.hqImage}`}>
+                  <Image src={hqImg} alt="Giliard at the Quorum office" />
+                </picture>
               </div>
             </div>
             <div className={styles.gridCard}>
               <div className={styles.textBlock}>
                 <h2>
-                  Building for government and public affairs
+                  Building for Public and Government Affairs
                 </h2>
                 <p>
                   Currently, I work for an American company called Quorum, a leading provider of Public Affairs software. Working primarily with the Grassroots Advocacy, I build experiences for organizations and government agencies to engage with their communities and stakeholders effectively.
@@ -98,6 +163,7 @@ export default function ContactPage() {
               </div>
             </div>
             <div className={styles.gridCard}>
+              <div className={styles.fullFlare}></div>
               <div className={styles.textBlock}>
                 <h2>
                   Certified Diamond Product Expert
@@ -114,18 +180,13 @@ export default function ContactPage() {
               </div>
             </div>
             <div className={styles.gridCard}>
-              <Image src={peImg} alt="Giliard at PE event" className={styles.peImage} />
+              <div className={styles.heightFlare}></div>
+              <div className={styles.peFrame}>
+                <Image src={peImg} alt="Giliard at PE event" className={styles.peImage} />
+              </div>
             </div>
             <div className={styles.gridCard}>
-              <div className={styles.funIcon}>
-                <p>⚽️</p>
-              </div>
-              <div className={styles.funIcon}>
-                <p>🎬</p>
-              </div>
-              <div className={styles.funIcon}>
-                <p>🍕</p>
-              </div>
+              <FunIcons />
             </div>
             <div className={styles.gridCard}>
               <div className={styles.textBlock}>

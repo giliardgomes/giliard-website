@@ -1,10 +1,11 @@
 .aboutWrapper {
   margin: 0 auto;
-  padding: 10rem var(--spacing-lg);
+  padding: 12rem var(--spacing-lg);
   min-height: 100dvh;
   flex-direction: column;
   display: flex;
   gap: var(--spacing-2xl);
+  overflow-x: clip;
 }
 
 .aboutGrid {
@@ -84,9 +85,14 @@
     }
   }
 
-  div:has(>.imgAbout) {
+  div:has(>picture .imgAbout) {
     padding: 0;
     justify-content: flex-end;
+    min-height: 30rem;
+
+    &::before {
+      left: -30%;
+    }
 
     &::after {
       content: "";
@@ -97,15 +103,31 @@
       background-image: radial-gradient(circle, var(--color-text) 1px, transparent 1px);
       opacity: .9;
       mask-image: radial-gradient(circle 30rem at bottom right, black 0%, transparent 100%);
-      height: 30rem;
-      width: 100%;
-      transform: translateY(-4.5rem);
+      /* Starts as the photo's slide-in settles */
+      transition: opacity 600ms ease-out 1s;
     }
   }
 
   div:has(>.stackGrid) {
     position: relative;
+
+    &.gridCard {
+      --fade-x: linear-gradient(to left, transparent, black 4rem);
+    }
+
+    &::before {
+      width: calc(100% + 12rem);
+    }
   }
+}
+
+.imgHeading {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: flex-end;
+  align-items: flex-end;
+  overflow: hidden;
 }
 
 .imgAbout {
@@ -115,7 +137,7 @@
   height: auto;
   height: 25rem;
   object-fit: contain;
-  margin: 0 1px 1px 0;
+  margin: auto 1px 1px 0;
 }
 
 .textBlock {
@@ -171,8 +193,8 @@
 
   p {
     font-family: var(--font-serif);
-    letter-spacing: -0.5px;
-    font-size: var(--font-size-md);
+    letter-spacing: 0;
+    font-size: 1.125rem;
     margin-bottom: var(--spacing-lg);
 
     &:last-child {
@@ -193,6 +215,38 @@
   justify-items: center;
   max-width: 22.5rem;
   height: 22.5rem;
+  margin: auto;
+}
+
+.stackTools {
+  position: relative;
+
+  span {
+    font-size: var(--font-size-xs);
+    text-align: center;
+    position: absolute;
+    white-space: nowrap;
+    left: 50%;
+    transform: translateX(-50%) scale(.7);
+    transition: all 0.3s ease-in-out;
+    color: var(--color-text-muted);
+    opacity: 0;
+    bottom: calc(var(--spacing-lg) / -1);
+    transform-origin: top;
+  }
+
+  &:hover {
+    span {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+  }
+
+  &:hover {
+    .toolIcon {
+      transform: scale(1.1);
+    }
+  }
 }
 
 .toolIcon {
@@ -202,6 +256,7 @@
   object-fit: contain;
   pointer-events: none;
   filter: drop-shadow(0 var(--spacing-sm) var(--spacing-md) color-mix(in srgb, var(--color-text) 10%, white 0%));
+  transition: all 0.3s ease-in-out;
 }
 
 html[data-theme='light'] .toolIcon {
@@ -213,28 +268,71 @@ html[data-theme='light'] .toolIcon {
   width: 19rem;
   height: 15rem;
   margin: auto;
+  /* Photos stack by depth (translateZ), which animates, instead of z-index */
+  transform-style: preserve-3d;
+
+  picture {
+    overflow: hidden;
+    transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out, translate 800ms ease-out var(--reveal-delay, 0s);
+
+    &:nth-child(2) {
+      --reveal-delay: 150ms;
+    }
+
+    &::after {
+      content: "";
+      width: 80%;
+      position: absolute;
+      height: 300%;
+      background: linear-gradient(to right, transparent, white, transparent);
+      top: -120px;
+      left: 5%;
+      transform: rotate(55deg);
+      opacity: .7;
+      transition: all 0.5s ease-in-out;
+      mix-blend-mode: luminosity;
+    }
+
+    &:hover {
+      transform: translateZ(1rem) rotate(-4deg) scale(1.2);
+      box-shadow: 0 var(--spacing-md) var(--spacing-md) rgb(0 0 0 / 12%);
+
+      &::after {
+        left: 30%;
+        opacity: .6;
+      }
+    }
+  }
 }
 
 .collageImage {
   position: absolute;
   width: 10rem;
   height: 12rem;
-  object-fit: cover;
   border: 0.4rem solid white;
   border-bottom-width: 1.2rem;
+  background: white;
   box-shadow: 0 0.35rem 0.9rem rgb(0 0 0 / 8%);
+  border-radius: 2px;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .hqImage {
   top: 0;
   left: 0;
-  transform: rotate(-8deg);
+  transform: translateZ(0) rotate(-8deg) scale(1);
 }
 
 .dcImage {
   right: 0;
   bottom: 0;
-  transform: rotate(12deg);
+  transform: translateZ(0) rotate(12deg) scale(1);
 }
 
 .flare {
@@ -283,15 +381,22 @@ div:has(>.photoCollage) {
     }
 }
 
+/* Clips the image while it zooms out on reveal */
+.peFrame {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 1;
+}
+
 .peImage {
   position: absolute;
   width: 100%;
   height: calc(100% - 1px);
   object-fit: cover;
-  z-index: 1;
 }
 
-div:has(>.peImage) {
+div:has(>.peFrame) {
   padding: 0!important;
 
   &::after {
@@ -309,6 +414,28 @@ div:has(>.peImage) {
     }
 }
 
+.heightFlare {
+  position: absolute;
+  left: 0;
+  pointer-events: none;
+  z-index: 2;
+  height: 100%;
+
+  &::before {
+    content: '';
+    background: linear-gradient(to bottom, transparent 0%, var(--color-text) 20%, transparent 120%);
+    width: 1px;
+    height: calc(100% + 12rem);
+    border-radius: 100%;
+    right: 0;
+    position: absolute;
+    z-index: 2;
+    pointer-events: none;
+    top: -6rem;
+    opacity: .8;
+  }
+}
+
 div:has(>.funIcon) {
   display: flex;
   align-items: center;
@@ -316,7 +443,7 @@ div:has(>.funIcon) {
 
   .funIcon:not(:last-child) {
     margin-right: calc(var(--spacing-sm) / -1);
-    transition: margin-right 250ms ease;
+    transition: margin-right 250ms ease, var(--reveal-transition);
   }
 
   &:hover .funIcon:not(:last-child) {
@@ -351,6 +478,16 @@ div:has(>.funIcon) {
   align-items: center;
   justify-content: center;
   box-shadow: 0 var(--spacing-sm) var(--spacing-md) color-mix(in srgb, var(--color-bg) 50%, white 0%), 0 var(--spacing-xs) var(--spacing-md) -2px var(--color-text-muted);
+  --reveal-transition: translate 600ms ease-out var(--reveal-delay, 0s), opacity 600ms ease-out var(--reveal-delay, 0s);
+  transition: var(--reveal-transition);
+
+  &:nth-child(2) {
+    --reveal-delay: 100ms;
+  }
+
+  &:nth-child(3) {
+    --reveal-delay: 200ms;
+  }
 
   p {
     font-size: 2.25rem;
@@ -358,6 +495,10 @@ div:has(>.funIcon) {
     z-index: 1;
     pointer-events: none;
     user-select: none;
+
+    @media (prefers-reduced-motion: no-preference) {
+      animation: emojiPop 300ms ease-out;
+    }
   }
 
   &::before {
@@ -370,6 +511,18 @@ div:has(>.funIcon) {
   }
 }
 
+@keyframes emojiPop {
+  from {
+    opacity: 0;
+    transform: scale(.4) rotate(-20deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+
 @keyframes typingBounce {
   0%, 60%, 100% {
     transform: translateY(0);
@@ -377,5 +530,155 @@ div:has(>.funIcon) {
 
   30% {
     transform: translateY(-1rem);
+  }
+}
+
+.fullFlare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  height: 100%;
+
+  &::before, &::after {
+    content: '';
+    width: 100vw;
+    position: absolute;
+    height: 1px;
+    background: linear-gradient(to right, transparent 5%, var(--color-text), transparent 95%);
+    opacity: .3;
+    top: 0;
+    left: 100%;
+    transform: translateX(-50%);
+    z-index: 2;
+
+    @media (max-width: 63rem) {
+      left: 50%;
+    }
+  }
+
+  &::after {
+    bottom: 0;
+    top: auto;
+    background: linear-gradient(to right, transparent 15%, var(--color-text), transparent 85%);
+  }
+}
+
+/* Scroll reveal: cards get data-visible from the IntersectionObserver in page.tsx.
+   Uses translate/scale/opacity so it doesn't fight the hover transforms and animations */
+.aboutGrid .gridCard {
+  transition: opacity 800ms ease-out;
+}
+
+/* Heading first, paragraphs half a second later */
+.textBlock > * {
+  transition: translate 800ms ease-out, opacity 800ms ease-out;
+}
+
+.textBlock > p {
+  transition-delay: 500ms;
+}
+
+.stackTools {
+  /* 9 tools, 100ms apart, 200ms each: all shown in 1s */
+  transition: opacity 200ms ease-out calc(var(--i) * 100ms), scale 200ms ease-out calc(var(--i) * 100ms);
+}
+
+.peImage {
+  transition: scale 1.2s ease-out;
+}
+
+.imgAbout {
+  transition: translate 1.4s cubic-bezier(.25, 1, .5, 1), opacity 1.4s ease-out;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .aboutGrid .gridCard:not([data-visible]) {
+    opacity: 0;
+
+    .textBlock > * {
+      translate: 0 1.5rem;
+    }
+
+    .textBlock > p {
+      opacity: 0;
+    }
+
+    .stackTools {
+      opacity: 0;
+      scale: .6;
+    }
+
+    .photoCollage picture {
+      translate: 0 -2rem;
+    }
+
+    .peImage {
+      scale: 1.2;
+    }
+
+    .imgAbout {
+      translate: 3rem 0;
+      opacity: 0;
+    }
+
+    .funIcon {
+      opacity: 0;
+      translate: 0 1.5rem;
+    }
+  }
+
+  .aboutGrid div:has(>picture .imgAbout):not([data-visible])::after {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .aboutWrapper {
+    padding-inline: 0;
+    padding-block: 5rem;
+  }
+
+  .aboutGrid {
+    max-width: 100%;
+  }
+
+  .aboutGrid .gridCard {
+    min-width: 20rem;
+    width: 100%;
+    max-width: 100%;
+    padding: var(--spacing-lg) var(--spacing-xl);
+    --grid-fade: 4rem;
+
+    &::before {
+      left: -1px;
+    }
+  }
+
+  .aboutGrid div.gridCard:nth-child(odd),
+  .aboutGrid div.gridCard:nth-child(even) {
+    --fade-x: linear-gradient(to right, transparent, black var(--grid-fade), black calc(100% - var(--grid-fade)), transparent);
+  }
+
+  .textBlock {
+    padding-block: var(--spacing-md);
+  }
+
+  .photoCollage {
+    margin-block: var(--spacing-xl);
+  }
+
+  /* Show the Product Expert photo before its text */
+  .aboutGrid .gridCard:has(> .peFrame) {
+    order: 1;
+  }
+
+  .aboutGrid .gridCard:has(> .fullFlare),
+  .aboutGrid .gridCard:has(> .peFrame) ~ .gridCard {
+    order: 2;
+  }
+
+  .gridCard:has(>.funIcon) {
+    min-height: auto;
+    margin: var(--spacing-xl) 0 0;
   }
 }
