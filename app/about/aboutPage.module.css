@@ -195,7 +195,7 @@
   p {
     font-family: var(--font-serif);
     letter-spacing: 0;
-    font-size: 1.125rem;
+    font-size: var(--font-size-md);
     margin-bottom: var(--spacing-lg);
 
     &:last-child {
@@ -217,6 +217,17 @@
   max-width: 22.5rem;
   height: 22.5rem;
   margin: auto;
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    left: 0;
+    background: linear-gradient(to right, transparent 20%, var(--color-text), transparent 80%);
+    opacity: .5;
+    bottom: 0;
+  }
 }
 
 .stackTools {
@@ -664,12 +675,18 @@ div:has(>.funIcon) {
     --fade-x: linear-gradient(to right, transparent, black var(--grid-fade), black calc(100% - var(--grid-fade)), transparent);
   }
 
+  div:has(>.photoCollage) {
+    &::before {
+      border-bottom: 0!important;
+    }
+  }
+
   .textBlock {
     padding-block: var(--spacing-md);
   }
 
   .photoCollage {
-    margin-block: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
   }
 
   /* Show the Product Expert photo before its text */
@@ -685,5 +702,23 @@ div:has(>.funIcon) {
   .gridCard:has(>.funIcon) {
     min-height: auto;
     margin: var(--spacing-xl) 0 0;
+  }
+
+  .stackGrid {
+    height: 17.5rem;
+    width: 17.5rem;
+    padding: var(--spacing-md);
+    padding-top: 0;
+    margin-bottom: var(--spacing-md)
+  }
+
+  div:has(>.stackGrid) {
+    background-color: var(--color-bg);
+    position: relative;
+    top: -2px;
+
+    &::before {
+      border-top: 0!important;
+    }
   }
 }
