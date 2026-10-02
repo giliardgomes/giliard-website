@@ -308,8 +308,8 @@ html[data-theme='light'] {
 @media (max-width: 768px) {
     .linksFooter {
         display: flex;
-        flex-wrap: wrap;
         justify-content: center;
-        padding-inline: var(--spacing-lg)!important;
+        padding-inline: 0!important;
+        flex-wrap: nowrap;
     }
 }
