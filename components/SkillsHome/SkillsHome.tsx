@@ -3,6 +3,7 @@
 import { motion, Variants } from 'framer-motion'
 import Section from '../Section/Section'
 import Collapse from '../Collapse/Collapse'
+import StackGrid from '../StackGrid/StackGrid'
 import styles from './SkillsHome.module.css'
 
 const skills = [
@@ -94,6 +95,7 @@ export default function SkillsHome() {
               </motion.span>
             ))}
           </motion.p>
+          <StackGrid className={styles.stackGrid} />
         </div>
         
         <div className={styles.list}>
