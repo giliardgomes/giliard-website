@@ -7,7 +7,7 @@ import Section from '../Section/Section'
 import CapitalTag from '../CapitalTag/CapitalTag'
 import CallToActions from '../CallToActions/CallToActions'
 import styles from './AboutHome.module.css'
-import aboutImg from "@/public/images/about.png";
+import aboutImg from "@/public/images/g-home.png";
 
 const logos = [
   { src: '/images/logos/uber.svg', alt: 'Uber', width: 46 },
@@ -115,11 +115,13 @@ export default function AboutHome() {
                 fill
                 priority
                 placeholder="blur"
-                style={{ objectFit: 'cover' }}
+                style={{ objectFit: 'cover', objectPosition: 'right bottom' }}
               />
             </motion.div>
           </div>
         </div>
+
+        <motion.div className={styles.divider} variants={textVariants} />
 
         <motion.div className={styles.trusted} variants={textVariants}>
           <CapitalTag dataSize="xs" content="Work trusted by teams at" />
@@ -138,9 +140,6 @@ export default function AboutHome() {
             </div>
           </div>
         </motion.div>
-
-        <motion.div className={styles.divider} variants={textVariants} />
-
       </motion.div>
     </Section>
   )
